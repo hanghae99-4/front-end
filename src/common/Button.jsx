@@ -26,7 +26,9 @@ const StBtn = styled.button`
 					width: auto;
 					background-color: #0095f6;
 					color: white;
+					padding: 1px 5px !important;
 					border: 1px solid transparent;
+					font-size: 12px;
 				`;
 			case "smallWhite":
 				return css`

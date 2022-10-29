@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { __signupThunk } from "../../../redux/modules/usersSlice";
+import {
+	__checkIdThunk,
+	__checkNicknameThunk,
+	__signupThunk,
+} from "../../../redux/modules/usersSlice";
 //style
 import styled from "styled-components";
 import Button from "../../../common/Button";
@@ -33,6 +37,13 @@ function SignupPage() {
 		setUserInfo({ ...userInfo, password: e.target.value });
 	};
 
+	const checkIdHandler = e => {
+		dispatch(__checkIdThunk(userInfo.memberId));
+	};
+	const checkNicknameHandler = e => {
+		dispatch(__checkNicknameThunk(userInfo.nickname));
+	};
+
 	const signupHandler = () => {
 		dispatch(__signupThunk({ userInfo, navigate }));
 		setUserInfo({
@@ -54,23 +65,33 @@ function SignupPage() {
 					⏹ Facebook으로 로그인
 				</Button>
 				<Button variant="smallwhite">또는</Button>
-				<Input
-					variant="join"
-					placeholder="아이디"
-					value={userInfo.memberId}
-					onChange={onChangeIdHandler}
-				></Input>
+				<InputWrap>
+					<Input
+						variant="join_s"
+						placeholder="아이디"
+						value={userInfo.memberId}
+						onChange={onChangeIdHandler}
+					></Input>
+					<Button variant="smallBlue" onClick={checkIdHandler}>
+						중복확인
+					</Button>
+				</InputWrap>
+				<InputWrap>
+					<Input
+						variant="join_s"
+						placeholder="닉네임"
+						value={userInfo.nickname}
+						onChange={onChangeNicknameHandler}
+					></Input>
+					<Button variant="smallBlue" onClick={checkNicknameHandler}>
+						중복확인
+					</Button>
+				</InputWrap>
 				<Input
 					variant="join"
 					placeholder="성명"
 					value={userInfo.username}
 					onChange={onChangeUsernameHandler}
-				></Input>
-				<Input
-					variant="join"
-					placeholder="닉네임"
-					value={userInfo.nickname}
-					onChange={onChangeNicknameHandler}
 				></Input>
 				<Input
 					variant="join"
@@ -117,4 +138,8 @@ const P = styled.p`
 	line-height: 16px;
 	margin: 10px 40px 30px;
 	text-align: center;
+`;
+
+const InputWrap = styled.div`
+	display: flex;
 `;
