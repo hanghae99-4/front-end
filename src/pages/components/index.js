@@ -1,5 +1,4 @@
-import Nav from "./Nav";
-import EditModal from "../EditModal";
-import PostModal from "../PostModal";
+import Header from "./Header";
+import Modal from "./modal/Modal";
 
-export { Nav, EditModal, PostModal };
+export { Header, Modal };

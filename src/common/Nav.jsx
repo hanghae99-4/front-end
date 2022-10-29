@@ -1,18 +1,21 @@
 import Div from "./Div";
 import Margin from "./Margin";
+import Image from "./Image";
+import { useDispatch } from "react-redux";
+import { updateIsModalOpen } from "../redux/modules/modalSlice";
 
 const Nav = () => {
+	const dispatch = useDispatch();
+	const handleOpenModal = () => {
+		dispatch(updateIsModalOpen());
+	};
+
 	return (
 		<Div>
 			<Margin margin="0 20px 0 0">
-				<img width="24" height="24" alt="" src="/images/addFeed-icon.png" />
+				<Image variant="navUpload" onClick={handleOpenModal} />
 			</Margin>
-			<img
-				width="24"
-				height="24"
-				alt=""
-				src="/images/profile-default-icon.png"
-			/>
+			<Image variant="profileDefaultIcon" />
 		</Div>
 	);
 };

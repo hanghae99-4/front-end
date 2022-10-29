@@ -1,4 +1,5 @@
 import Div from "../../common/Div";
+import Image from "../../common/Image";
 import Input from "../../common/Input";
 import Layout from "../../common/Layout";
 import Margin from "../../common/Margin";
@@ -9,13 +10,7 @@ const Header = () => {
 		<Div variant="header">
 			<Layout variant="header">
 				<Margin margin="5px 0 0 0">
-					<img
-						width="103"
-						height="29"
-						objectFit="cover"
-						alt=""
-						src="/images/Instagram-Wordmark.png"
-					/>
+					<Image variant="navMarkInsta" />
 				</Margin>
 				<Input variant="search" />
 				<Nav />
