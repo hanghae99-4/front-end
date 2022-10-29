@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { SigninPage } from "..";
@@ -5,8 +6,8 @@ import Modal from "../components/modal/Modal";
 import Header from "../components/Header";
 
 const Homepage = () => {
-	const [token, setToken] = useState(true);
-
+	const token = localStorage.getItem("token");
+	useEffect(() => {});
 	return (
 		<>
 			{token ? (
