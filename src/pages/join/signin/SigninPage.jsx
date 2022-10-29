@@ -1,32 +1,66 @@
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __Signin } from "../../../redux/modules/usersSlice";
+
+// style
 import styled from "styled-components";
 import Div from "../../../common/Div";
-import StImg from "../components/StImg";
-import img1 from "../../../static/images/screenshot1.png";
 import Input from "../../../common/Input";
 import Button from "../../../common/Button";
+import Layout from "../components/Layout";
+import StImg from "../components/StImg";
+import img1 from "../../../static/images/screenshot1.png";
 
 const SigninPage = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [userInfo, setUserInfo] = useState({
+		userId: "",
+		password: "",
+	});
+
+	const onChangeIdhandler = e => {
+		setUserInfo({ ...userInfo, userId: e.target.value });
+	};
+	const onChangePwhandler = e => {
+		setUserInfo({ ...userInfo, password: e.target.value });
+	};
+
+	const signinHandler = e => {
+		dispatch(__Signin({ userInfo, navigate }));
+	};
+
 	return (
-		<Main>
-			<StArticle>
-				<StImgBox>
-					<StImg variant="1" src={img1}></StImg>
-				</StImgBox>
-				<Div variant="join">
-					<LogoBox>
-						<Div variant="logo"></Div>
-					</LogoBox>
-					<InputBox>
-						<Input
-							variant="join"
-							placeholder="전화번호, 사용자 이름 또는 이메일"
-						></Input>
-						<Input variant="join" placeholder="비밀번호"></Input>
-					</InputBox>
-					<Button variant="longBlue">로그인</Button>
-				</Div>
-			</StArticle>
-		</Main>
+		<Layout>
+			<StImgBox>
+				<StImg variant="1" src={img1}></StImg>
+			</StImgBox>
+			<Div variant="join">
+				<LogoBox>
+					<Div variant="logo"></Div>
+				</LogoBox>
+				<InputBox>
+					<Input
+						variant="join"
+						placeholder="아이디를 입력해주세요"
+						value={userInfo.userId}
+						onChange={onChangeIdhandler}
+					></Input>
+					<Input
+						variant="join"
+						placeholder="비밀번호를 입력해주세요"
+						value={userInfo.id}
+						onChange={onChangePwhandler}
+					/>
+				</InputBox>
+				<Button variant="longBlue" onClick={signinHandler}>
+					로그인
+				</Button>
+			</Div>
+		</Layout>
 	);
 };
 
@@ -41,36 +75,6 @@ const LogoBox = styled.div`
 	padding: 10px;
 	width: 175px;
 	height: 51px;
-`;
-
-const Main = styled.div`
-	align-items: stretch;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	flex-shrink: 0;
-	margin: 0;
-	order: 4;
-	padding: 0;
-	position: relative;
-	background-color: rgb(250, 250, 250);
-`;
-
-const StArticle = styled.article`
-	justify-content: center;
-	padding-left: 0;
-	width: 100%;
-	margin-top: 32px;
-	margin-bottom: 0;
-	padding-top: 0;
-	padding-right: 0;
-	padding-bottom: 32px;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: row;
-	flex-shrink: 0;
-	flex-grow: 1;
 `;
 
 const StImgBox = styled.div`
