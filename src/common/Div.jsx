@@ -16,7 +16,7 @@ const StDiv = styled.div`
 					width: 100%;
 					height: 60px;
 					padding: 0 16px;
-					justify-content: space-between;
+					justify-content: center;
 					border-bottom: 1px solid rgb(219, 219, 219);
 				`;
 			default:
