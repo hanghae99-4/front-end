@@ -4,7 +4,7 @@ import { SigninPage } from "..";
 import Nav from "../components/Nav";
 
 const Homepage = () => {
-	const [token, setToken] = useState(true);
+	const [token, setToken] = useState(false);
 
 	return (
 		<>
