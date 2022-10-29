@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { __Signin } from "../../../redux/modules/usersSlice";
-
+import { __signinThunk } from "../../../redux/modules/usersSlice";
 // style
 import styled from "styled-components";
 import Div from "../../../common/Div";
@@ -18,19 +16,23 @@ const SigninPage = () => {
 	const navigate = useNavigate();
 
 	const [userInfo, setUserInfo] = useState({
-		userId: "",
+		memberId: "",
 		password: "",
 	});
 
 	const onChangeIdhandler = e => {
-		setUserInfo({ ...userInfo, userId: e.target.value });
+		setUserInfo({ ...userInfo, memberId: e.target.value });
 	};
 	const onChangePwhandler = e => {
 		setUserInfo({ ...userInfo, password: e.target.value });
 	};
 
 	const signinHandler = e => {
-		dispatch(__Signin({ userInfo, navigate }));
+		dispatch(__signinThunk(userInfo));
+		setUserInfo({
+			memberId: "",
+			password: "",
+		});
 	};
 
 	return (
@@ -46,11 +48,12 @@ const SigninPage = () => {
 					<Input
 						variant="join"
 						placeholder="아이디를 입력해주세요"
-						value={userInfo.userId}
+						value={userInfo.memberId}
 						onChange={onChangeIdhandler}
 					></Input>
 					<Input
 						variant="join"
+						type="password"
 						placeholder="비밀번호를 입력해주세요"
 						value={userInfo.id}
 						onChange={onChangePwhandler}
@@ -59,12 +62,21 @@ const SigninPage = () => {
 				<Button variant="longBlue" onClick={signinHandler}>
 					로그인
 				</Button>
+				<Button
+					variant="smallWhite"
+					onClick={() => {
+						navigate("/signup");
+					}}
+				>
+					회원가입
+				</Button>
 			</Div>
 		</Layout>
 	);
 };
 
 export default SigninPage;
+
 const InputBox = styled.div`
 	margin-top: 75px;
 	display: flex;

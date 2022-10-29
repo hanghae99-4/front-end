@@ -10,7 +10,8 @@ const StBtn = styled.button`
 	box-sizing: border-box;
 	border-radius: 4px;
 	display: block;
-	font-size: 14px;
+	margin-bottom: 6px;
+	font-size: ${({ fs }) => (fs ? fs : "14px")};
 	font-weight: 700;
 	padding: 5px 9px !important;
 	text-align: center;
