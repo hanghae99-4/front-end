@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { SigninPage } from "..";
-import Nav from "../components/Nav";
+import Modal from "../components/modal/Modal";
+import Header from "../components/Header";
 
 const Homepage = () => {
 	const token = localStorage.getItem("token");
@@ -11,7 +12,8 @@ const Homepage = () => {
 		<>
 			{token ? (
 				<>
-					<Nav />
+					<Modal />
+					<Header />
 					<Outlet></Outlet>
 				</>
 			) : (
