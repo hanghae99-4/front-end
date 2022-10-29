@@ -10,7 +10,8 @@ const StBtn = styled.button`
 	box-sizing: border-box;
 	border-radius: 4px;
 	display: block;
-	font-size: 14px;
+	margin-bottom: 6px;
+	font-size: ${({ fs }) => (fs ? fs : "14px")};
 	font-weight: 700;
 	padding: 5px 9px !important;
 	text-align: center;
@@ -25,7 +26,9 @@ const StBtn = styled.button`
 					width: auto;
 					background-color: #0095f6;
 					color: white;
+					padding: 1px 5px !important;
 					border: 1px solid transparent;
+					font-size: 12px;
 				`;
 			case "smallWhite":
 				return css`
