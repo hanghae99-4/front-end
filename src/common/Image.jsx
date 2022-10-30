@@ -19,7 +19,7 @@ const Image = ({ variant, onClick }) => {
 					alt=""
 				/>
 			);
-		case "navMarkInsta":
+		case "navWordMark":
 			return (
 				<img
 					src="/images/Instagram-Wordmark.png"
@@ -46,7 +46,7 @@ const Image = ({ variant, onClick }) => {
 			return (
 				<img src="/images/uploadFile-icon.png" width="80" height="77" alt="" />
 			);
-		case "goBack":
+		case "goBackIcon":
 			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
 		default:
 			break;

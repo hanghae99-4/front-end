@@ -15,7 +15,7 @@ function Modal() {
 	return (
 		// 모달 뒷배경을 눌렀을 때 모달이 사라짐(사실 안 사라짐)
 		<Div
-			variant="overlay"
+			variant="modalOverlay"
 			onClick={() => {
 				dispatch(updateIsModalOpen());
 			}}
@@ -41,7 +41,7 @@ function Modal() {
 					<Div variant="modalBox">
 						{/* 모달창 헤더 */}
 						<Div variant="modalHeader">
-							<Image variant="goBack" />
+							<Image variant="goBackIcon" />
 							<p>새 게시물 만들기</p>
 							<Button variant="smallWhite">공유하기</Button>
 						</Div>

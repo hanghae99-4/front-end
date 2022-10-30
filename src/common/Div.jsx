@@ -21,7 +21,7 @@ const StDiv = styled.div`
 				`;
 
 			// 헤더
-			case "header":
+			case "headerBox":
 				return css`
 					width: 100%;
 					height: 60px;
@@ -85,7 +85,7 @@ const StDiv = styled.div`
 					padding: 0 16px;
 					justify-content: space-between;
 				`;
-			case "overlay":
+			case "modalOverlay":
 				return css`
 					background-color: rgba(0, 0, 0, 0.6);
 					position: fixed;

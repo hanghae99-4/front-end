@@ -7,12 +7,12 @@ import Nav from "../../common/Nav";
 
 const Header = () => {
 	return (
-		<Div variant="header">
-			<Layout variant="header">
+		<Div variant="headerBox">
+			<Layout variant="headerLayout">
 				<Margin margin="5px 0 0 0">
-					<Image variant="navMarkInsta" />
+					<Image variant="navWordMark" />
 				</Margin>
-				<Input variant="search" />
+				<Input variant="searchInput" />
 				<Nav />
 			</Layout>
 		</Div>
