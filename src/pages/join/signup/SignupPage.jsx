@@ -11,7 +11,7 @@ import styled from "styled-components";
 import Button from "../../../common/Button";
 import Div from "../../../common/Div";
 import Input from "../../../common/Input";
-import Layout from "../components/Layout";
+import Layout from "../components/JoinLayout";
 
 function SignupPage() {
 	const dispatch = useDispatch();
