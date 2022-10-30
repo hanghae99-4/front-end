@@ -11,7 +11,13 @@ const StLayout = styled.div`
 
 	${({ variant }) => {
 		switch (variant) {
-			case "header":
+			case "headerLayout":
+				return css`
+					width: 975px;
+					height: 100%;
+					justify-content: space-between;
+				`;
+			case "mainContentsLayout":
 				return css`
 					width: 975px;
 					height: 100%;

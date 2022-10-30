@@ -34,7 +34,7 @@ const StInput = styled.input`
 					border-radius: 3px;
 					margin-bottom: 7px;
 				`;
-			case "search":
+			case "searchInput":
 				return css`
 					padding: 16px 8px;
 					background-color: rgb(239, 239, 239);
