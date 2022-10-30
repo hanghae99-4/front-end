@@ -19,6 +19,15 @@ const Image = ({ variant, onClick }) => {
 					alt=""
 				/>
 			);
+		case "profileDefaultIconBig":
+			return (
+				<img
+					src="/images/profile-default-icon.png"
+					width="150"
+					height="150"
+					alt=""
+				/>
+			);
 		case "navWordMark":
 			return (
 				<img
@@ -48,6 +57,8 @@ const Image = ({ variant, onClick }) => {
 			);
 		case "goBackIcon":
 			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
+		case "sample":
+			return <img onClick={onClick} src="/images/sample.jpg" alt="" />;
 		default:
 			break;
 	}
