@@ -122,6 +122,28 @@ const StDiv = styled.div`
 					flex-direction: column;
 					align-items: center;
 				`;
+
+			// 프로필 페이지
+			case "profileInfoArea":
+				return css`
+					height: 100%;
+					margin-left: 80px;
+					flex-direction: column;
+					align-items: flex-start;
+					justify-content: space-between;
+				`;
+			case "profileInfoCounterArea":
+				return css`
+					flex-direction: row;
+					gap: 60px;
+				`;
+
+			case "nicknameAndBtns":
+				return css`
+					flex-direction: row;
+					gap: 25px;
+				`;
+
 			default:
 				break;
 		}
