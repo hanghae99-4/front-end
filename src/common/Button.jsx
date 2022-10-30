@@ -37,6 +37,12 @@ const StBtn = styled.button`
 					color: #0095f6;
 					border: 1px solid transparent;
 				`;
+			case "smallBlack":
+				return css`
+					width: auto;
+					background-color: white;
+					border: 1px solid transparent;
+				`;
 			case "longBlue":
 				return css`
 					width: 268px;
