@@ -137,13 +137,20 @@ const StDiv = styled.div`
 					flex-direction: row;
 					gap: 60px;
 				`;
-
 			case "nicknameAndBtns":
 				return css`
 					flex-direction: row;
 					gap: 25px;
 				`;
 
+			// 수정 페이지
+			case "sampleInEditor":
+				return css`
+					width: 100%;
+					height: 100%;
+					background-image: url("/images/sample.jpg");
+					background-size: cover;
+				`;
 			default:
 				break;
 		}

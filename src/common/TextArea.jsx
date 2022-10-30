@@ -15,6 +15,9 @@ const StTextArea = styled.textarea`
 					height: 100%;
 					background-color: transparent;
 					padding: 0 16px;
+					::placeholder {
+						color: #bec3c9;
+					}
 				`;
 			default:
 				break;
