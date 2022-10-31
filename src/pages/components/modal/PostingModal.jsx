@@ -8,7 +8,7 @@ import { updateIsModalOpen } from "../../../redux/modules/modalSlice";
 import { useRef, useState } from "react";
 import { __addFeed } from "../../../redux/modules/feedSlice";
 
-function Modal() {
+function PostingModal() {
 	const isModalOpen = useSelector(state => state.modalSlice.isModalOpen);
 	const dispatch = useDispatch();
 	const [imgFile, setImgFile] = useState({});
@@ -125,4 +125,4 @@ function Modal() {
 	);
 }
 
-export default Modal;
+export default PostingModal;

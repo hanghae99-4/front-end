@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { SigninPage } from "..";
-import Modal from "../components/modal/Modal";
+import PostingModal from "../components/modal/PostingModal";
 import Header from "../components/Header";
 import EditorModal from "../components/modal/EditorModal";
 
@@ -13,7 +12,7 @@ const Homepage = () => {
 		<>
 			{token ? (
 				<>
-					<Modal />
+					<PostingModal />
 					<EditorModal />
 					<Header />
 					<Outlet></Outlet>
