@@ -1,11 +1,12 @@
-import Button from "../../common/Button";
+import Layout from "../../common/Layout";
+import Feed from "./components/Feed";
 
 function FeedPage() {
 	return (
-		<>
-			<div>FeedPage</div>
-		</>
+		<Layout variant="feedPageLayout">
+			<Feed />
+			<Feed />
+		</Layout>
 	);
 }
-
 export default FeedPage;

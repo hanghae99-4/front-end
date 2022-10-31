@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Div from "../../../common/Div";
 import Input from "../../../common/Input";
 import Button from "../../../common/Button";
-import Layout from "../components/Layout";
+import Layout from "../components/JoinLayout";
 import StImg from "../components/StImg";
 import img1 from "../../../static/images/screenshot1.png";
 

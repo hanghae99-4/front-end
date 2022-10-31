@@ -20,6 +20,15 @@ const StDiv = styled.div`
 					align-items: center;
 				`;
 
+			case "photoAndId_border":
+				return css`
+					height: 60px;
+					width: 100%;
+					justify-content: flex-start;
+					align-items: center;
+					border-bottom: 1px solid rgb(239, 239, 239);
+				`;
+
 			// 헤더
 			case "headerBox":
 				return css`
@@ -44,13 +53,11 @@ const StDiv = styled.div`
 				`;
 			case "join":
 				return css`
-					align-items: center;
 					background-color: rgb(255, 255, 255);
 					border: 1px solid rgb(219, 219, 219);
 					width: 350px;
 					border-radius: 1px;
 					box-sizing: border-box;
-					display: flex;
 					flex-direction: column;
 					flex-shrink: 0;
 					font: inherit;
@@ -123,6 +130,77 @@ const StDiv = styled.div`
 					align-items: center;
 				`;
 
+			//디테일 모달
+			case "modalContainer":
+				return css`
+					width: 80vw;
+					max-width: 1200px;
+					height: 80vh;
+					max-height: 800px;
+					justify-content: center;
+					flex-direction: column;
+					background-color: #ffffff;
+					text-align: center;
+				`;
+			case "detailPostion":
+				return css`
+					position: absolute;
+					top: -30px;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					height: 100%;
+					margin-top: 0;
+				`;
+			case "detailContentLayout":
+				return css`
+					width: 100%;
+					height: 100%;
+					position: relative;
+					align-self: space-between;
+					flex-wrap: wrap;
+				`;
+			case "detailContent":
+				return css`
+					margin: 5px 5px 5px 12px;
+					min-height: 34px;
+					height: auto;
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+				`;
+			case "floatProfile":
+				return css`
+					display: inline-block;
+					float: left;
+				`;
+			case "writeComment":
+				return css`
+					width: 100%;
+					position: absolute;
+					justify-content: flex-end;
+					align-items: flex-end;
+					align-self: flex-end;
+					display: flex;
+					flex-direction: column;
+				`;
+			case "detailCommentArea":
+				return css`
+					width: inherit;
+					position: absolute;
+					box-sizing: border-box;
+					align-self: flex-start;
+					border-top: 1px solid rgb(239, 239, 239);
+					color: rgb(142, 142, 142);
+					font-size: 14px;
+					justify-content: flex-start;
+					align-items: flex-start;
+					position: relative;
+					flex-direction: column;
+				`;
+
 			// 프로필 페이지
 			case "profileInfoArea":
 				return css`
@@ -150,6 +228,97 @@ const StDiv = styled.div`
 					height: 100%;
 					background-image: url("/images/sample.jpg");
 					background-size: cover;
+				`;
+
+			//피드 리스트 페이지
+			case "feedBox":
+				return css`
+					background-color: rgb(255, 255, 255);
+					border: 1px solid rgb(219, 219, 219);
+					width: 470px;
+					border-radius: 1px;
+					box-sizing: border-box;
+					flex-grow: 1;
+					flex-shrink: 1;
+					flex-direction: column;
+					flex-shrink: 0;
+					font: inherit;
+					font-size: 100%;
+					margin-top: 20px;
+					padding-top: 10px;
+					position: relative;
+					vertical-align: baseline;
+					border-radius: 5px;
+				`;
+			case "feedHeader":
+				return css`
+					min-height: 40px;
+					flex-flow: row flex-start;
+					box-sizing: border-box;
+					flex-grow: 1;
+					flex-shrink: 1;
+					margin-bottom: 5px;
+					overflow: hidden;
+					position: relative;
+					align-self: flex-start;
+					left: 10px;
+				`;
+			case "ImgArea":
+				return css`
+					min-width: 470px;
+					flex-flow: row flex-start;
+					box-sizing: border-box;
+					flex-grow: 1;
+					flex-shrink: 1;
+					overflow: hidden;
+					position: relative;
+				`;
+			case "iconArea":
+				return css`
+					min-height: 40px;
+					flex-flow: row flex-start;
+					box-sizing: border-box;
+					flex-grow: 1;
+					flex-shrink: 1;
+					overflow: hidden;
+					position: relative;
+					align-self: flex-start;
+					left: 10px;
+				`;
+			case "likeArea":
+				return css`
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					left: 2px;
+				`;
+			case "contentArea":
+				return css`
+					margin: 5px 5px 5px 12px;
+					min-height: 34px;
+					height: auto;
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					flex-wrap: wrap;
+					top: -10px;
+				`;
+			case "commentArea":
+				return css`
+					width: 468px;
+					flex-direction: column;
+					margin: 0;
+					height: auto;
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					border-top: 1px solid rgb(239, 239, 239);
+					color: rgb(142, 142, 142);
+					flex-shrink: 0;
+					font-size: 14px;
+					justify-content: flex-start;
+					align-items: flex-start;
+					position: relative;
 				`;
 			default:
 				break;

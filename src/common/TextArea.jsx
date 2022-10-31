@@ -19,6 +19,30 @@ const StTextArea = styled.textarea`
 						color: #bec3c9;
 					}
 				`;
+			case "commentWrite":
+				return css`
+					width: 410px;
+					height: auto;
+					align-items: center;
+					border: 0;
+					display: flex;
+					flex-direction: row;
+					flex-grow: 1;
+					flex-shrink: 1;
+					font: inherit;
+					font-size: 14px;
+					margin: 0;
+					padding: 13px 10px 0 10px;
+					border-radius: 5px;
+					position: relative;
+					vertical-align: baseline;
+					::placeholder {
+						color: #8d949e;
+					}
+					::-webkit-scrollbar {
+						display: none;
+					}
+				`;
 			default:
 				break;
 		}

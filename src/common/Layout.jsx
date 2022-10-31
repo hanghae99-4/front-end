@@ -41,6 +41,16 @@ const StLayout = styled.div`
 					grid-template-columns: repeat(3, 1fr);
 					grid-gap: 28px;
 				`;
+			case "feedPageLayout":
+				return css`
+					justify-content: center;
+					min-width: 470px;
+					min-height: 500px;
+					box-sizing: border-box;
+					flex-direction: column;
+					position: relative;
+					background-color: rgb(250, 250, 250);
+				`;
 			default:
 				break;
 		}

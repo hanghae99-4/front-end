@@ -19,6 +19,17 @@ const Image = ({ variant, onClick }) => {
 					alt=""
 				/>
 			);
+		case "profileDefaultIconMid":
+			return (
+				<img
+					src="/images/profile-default-icon.png"
+					width="32px"
+					height="32px"
+					alt=""
+					top="10px"
+					left="-5px"
+				/>
+			);
 		case "profileDefaultIconBig":
 			return (
 				<img
@@ -28,6 +39,7 @@ const Image = ({ variant, onClick }) => {
 					alt=""
 				/>
 			);
+
 		case "navWordMark":
 			return (
 				<img
@@ -51,6 +63,8 @@ const Image = ({ variant, onClick }) => {
 					alt=""
 				/>
 			);
+
+		//아이콘
 		case "uploadImageIcon":
 			return (
 				<img src="/images/uploadFile-icon.png" width="80" height="77" alt="" />
@@ -59,6 +73,46 @@ const Image = ({ variant, onClick }) => {
 			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
 		case "sample":
 			return <img onClick={onClick} src="/images/sample.jpg" alt="" />;
+
+		case "heartIcon":
+			return (
+				<img
+					src="/images/likeicon.jpg"
+					position="absoulte"
+					height="100%"
+					object-fit="cover"
+					alt="heartIcon"
+				/>
+			);
+
+		case "commentIcon":
+			return (
+				<img
+					src="/images/commenticon.jpg"
+					position="absoulte"
+					height="100%"
+					object-fit="cover"
+					alt="commentIcon"
+				/>
+			);
+
+		//피드 이미지
+		case "feedImg":
+			return (
+				<img
+					onClick={onClick}
+					src="/images/mycat.jpg"
+					position="absolute"
+					sizes="470px"
+					alt=""
+					width="100%"
+					height="100%"
+					object-fit="cover"
+					transform="translate(-50%, -50%)"
+					object-position="center"
+					background-position="center"
+				/>
+			);
 		default:
 			break;
 	}
