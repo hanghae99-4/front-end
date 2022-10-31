@@ -1,27 +1,33 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Div from "../../../common/Div";
-import Image from "../../../common/Image";
+import Svg from "../../../common/Svg";
+import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
 const FeedIcon = () => {
+	const [isLike, setIsLike] = useState(false);
+
+	const onClickLike = () => {
+		console.log("LikeBtn");
+		setIsLike(!isLike);
+	};
+	const dispatch = useDispatch();
+	const OpenModal = () => {
+		console.log("openModal");
+		dispatch(updateDetailModalOpen());
+	};
 	return (
 		<Div variant="iconArea">
-			<IconWrap>
-				<Image variant="heartIcon"></Image>
-			</IconWrap>
-			<IconWrap>
-				<Image variant="commentIcon"></Image>
-			</IconWrap>
+			<Svg
+				variant={isLike ? "cancelLike" : "like"}
+				isLike={isLike}
+				setIsLike={setIsLike}
+				onClick={onClickLike}
+			/>
+			<Svg variant="comment" onClick={OpenModal} />
 		</Div>
 	);
 };
 
 export default FeedIcon;
-
-const IconWrap = styled.div`
-	height: 32px;
-	width: 32px;
-	overflow: hidden;
-	position: relative;
-	margin-right: 9px;
-	margin-top: 7px;
-`;

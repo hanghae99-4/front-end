@@ -43,9 +43,9 @@ const StLayout = styled.div`
 				`;
 			case "feedPageLayout":
 				return css`
+					width: 100%;
+					height: 100%;
 					justify-content: center;
-					min-width: 470px;
-					min-height: 500px;
 					box-sizing: border-box;
 					flex-direction: column;
 					position: relative;

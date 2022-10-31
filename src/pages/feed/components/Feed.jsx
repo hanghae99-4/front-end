@@ -1,11 +1,7 @@
 import React from "react";
-
 import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import A from "../../../common/A";
-
-import Text from "../../../common/Text";
-import TextArea from "../../../common/TextArea";
 import FeedContent from "./FeedContent";
 import FeedLike from "./FeedLike";
 import FeedIcon from "./FeedIcon";

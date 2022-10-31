@@ -3,10 +3,13 @@ import Feed from "./components/Feed";
 
 function FeedPage() {
 	return (
-		<Layout variant="feedPageLayout">
-			<Feed />
-			<Feed />
-		</Layout>
+		<>
+			{/* 메인 피드페이지 */}
+			<Layout variant="feedPageLayout">
+				<Feed />
+				<Feed />
+			</Layout>
+		</>
 	);
 }
 export default FeedPage;

@@ -5,8 +5,14 @@ import Image from "../../../common/Image";
 import Text from "../../../common/Text";
 import TextArea from "../../../common/TextArea";
 import Button from "../../../common/Button";
+import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
+import { useDispatch } from "react-redux";
 
 const FeedContent = ({ userNickname }) => {
+	const dispatch = useDispatch();
+	const OpenModal = () => {
+		dispatch(updateDetailModalOpen());
+	};
 	return (
 		<>
 			<Div variant="contentArea">
@@ -14,7 +20,9 @@ const FeedContent = ({ userNickname }) => {
 					<A variant="noMargin">{userNickname}</A>
 				</NicknameWrap>
 				<Text>우리집 고양이는 바깥 구경을 좋아해요!</Text>
-				<A variant="comment">댓글 5개 모두 보기</A>
+				<A variant="comment" onClick={OpenModal}>
+					댓글 5개 모두 보기
+				</A>
 			</Div>
 			<Div variant="commentArea">
 				<TextArea variant="commentWrite" placeholder="댓글 달기..." />
