@@ -1,5 +1,8 @@
-import { useDispatch } from "react-redux";
-import { updateIsEditorModalOpen } from "../../redux/modules/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	updateDetailModalOpen,
+	updateIsEditorModalOpen,
+} from "../../redux/modules/modalSlice";
 import Button from "../../common/Button";
 import Div from "../../common/Div";
 import Image from "../../common/Image";
@@ -13,15 +16,22 @@ import FeedLike from "../feed/components/FeedLike";
 import TextArea from "../../common/TextArea";
 
 const DetailPage = () => {
+	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const dispatch = useDispatch();
-	const handleOpenEditorModal = () => {
-		dispatch(updateIsEditorModalOpen());
+	const CloseModal = () => {
+		dispatch(updateDetailModalOpen());
 	};
+
+	if (!isDetailOpen) return null;
 
 	return (
 		<Div variant="modalOverlay">
 			<Div variant="detailPostion">
 				<Div variant="modalContainer">
+					{/* 닫기버튼 */}
+					<Div variant="closeModalBtn" onClick={CloseModal}>
+						<Image variant="closeModalBtn" />
+					</Div>
 					<Div variant="modalContents">
 						{/* 사진영역 */}
 						<Div variant="uploadImageArea">
@@ -70,8 +80,6 @@ const DetailPage = () => {
 			</Div>
 		</Div>
 	);
-
-	// <Button onClick={handleOpenEditorModal}>수정</Button>;
 };
 
 export default DetailPage;

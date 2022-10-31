@@ -32,6 +32,7 @@ const StA = styled.a`
 					margin: 10px 0 0 0;
 					font-weight: 400;
 					display: block;
+					cursor: pointer;
 				`;
 			case "inDetail":
 				return css`

@@ -5,6 +5,8 @@ const Div = ({ children, ...props }) => {
 };
 export default Div;
 
+const ogu = "aa";
+
 const StDiv = styled.div`
 	display: flex;
 	align-items: center;
@@ -96,8 +98,9 @@ const StDiv = styled.div`
 				return css`
 					background-color: rgba(0, 0, 0, 0.6);
 					position: fixed;
-					width: 100%;
-					height: 100%;
+					width: 100vw;
+					height: 100vh;
+					z-index: 20;
 				`;
 			case "closeModalBtn":
 				return css`
@@ -133,10 +136,10 @@ const StDiv = styled.div`
 			//디테일 모달
 			case "modalContainer":
 				return css`
+					position: absolute;
 					width: 80vw;
 					max-width: 1200px;
 					height: 80vh;
-					max-height: 800px;
 					justify-content: center;
 					flex-direction: column;
 					background-color: #ffffff;
@@ -145,7 +148,6 @@ const StDiv = styled.div`
 			case "detailPostion":
 				return css`
 					position: absolute;
-					top: -30px;
 					justify-content: center;
 					align-items: center;
 					width: 100%;
