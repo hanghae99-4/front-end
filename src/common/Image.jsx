@@ -26,7 +26,6 @@ const Image = ({ variant, onClick }) => {
 					width="32px"
 					height="32px"
 					alt=""
-					// position="absolute"
 					top="10px"
 					left="-5px"
 				/>

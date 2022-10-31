@@ -20,6 +20,15 @@ const StDiv = styled.div`
 					align-items: center;
 				`;
 
+			case "photoAndId_border":
+				return css`
+					height: 60px;
+					width: 100%;
+					justify-content: flex-start;
+					align-items: center;
+					border-bottom: 1px solid rgb(239, 239, 239);
+				`;
+
 			// 헤더
 			case "headerBox":
 				return css`
@@ -119,6 +128,77 @@ const StDiv = styled.div`
 					height: 100%;
 					flex-direction: column;
 					align-items: center;
+				`;
+
+			//디테일 모달
+			case "modalContainer":
+				return css`
+					width: 80vw;
+					max-width: 1200px;
+					height: 80vh;
+					max-height: 800px;
+					justify-content: center;
+					flex-direction: column;
+					background-color: #ffffff;
+					text-align: center;
+				`;
+			case "detailPostion":
+				return css`
+					position: absolute;
+					top: -30px;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					height: 100%;
+					margin-top: 0;
+				`;
+			case "detailContentLayout":
+				return css`
+					width: 100%;
+					height: 100%;
+					position: relative;
+					align-self: space-between;
+					flex-wrap: wrap;
+				`;
+			case "detailContent":
+				return css`
+					margin: 5px 5px 5px 12px;
+					min-height: 34px;
+					height: auto;
+					position: relative;
+					box-sizing: border-box;
+					align-self: flex-start;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+				`;
+			case "floatProfile":
+				return css`
+					display: inline-block;
+					float: left;
+				`;
+			case "writeComment":
+				return css`
+					width: 100%;
+					position: absolute;
+					justify-content: flex-end;
+					align-items: flex-end;
+					align-self: flex-end;
+					display: flex;
+					flex-direction: column;
+				`;
+			case "detailCommentArea":
+				return css`
+					width: inherit;
+					position: absolute;
+					box-sizing: border-box;
+					align-self: flex-start;
+					border-top: 1px solid rgb(239, 239, 239);
+					color: rgb(142, 142, 142);
+					font-size: 14px;
+					justify-content: flex-start;
+					align-items: flex-start;
+					position: relative;
+					flex-direction: column;
 				`;
 
 			// 프로필 페이지

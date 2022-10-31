@@ -6,12 +6,15 @@ const Text = ({ children, ...props }) => {
 export default Text;
 
 const StText = styled.span`
-	display: inline !important;
 	position: relative;
 	font-size: 14px;
 	line-height: 18px;
+	word-break: break-all;
+
 	${({ variant }) => {
 		switch (variant) {
+			case "":
+				return css``;
 			default:
 				break;
 		}

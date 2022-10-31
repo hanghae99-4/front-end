@@ -41,7 +41,7 @@ const StBtn = styled.button`
 				return css`
 					width: 60px;
 					position: absolute;
-					left: 85%;
+					left: 83%;
 					justify-content: flex-end;
 					background-color: white;
 					margin: 5px 10px auto 10px;

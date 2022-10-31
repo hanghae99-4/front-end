@@ -6,8 +6,8 @@ const A = ({ children, ...props }) => {
 export default A;
 
 const StA = styled.a`
-	border: 0;
 	display: inline-block;
+	border: 0;
 	padding: 0 !important;
 	align-items: inherit;
 	align-self: inherit;
@@ -17,6 +17,7 @@ const StA = styled.a`
 	text-align: center;
 	text-overflow: ellipsis;
 	text-transform: inherit;
+	float: left;
 	font-weight: 600;
 
 	${({ variant }) => {
@@ -28,8 +29,16 @@ const StA = styled.a`
 			case "comment":
 				return css`
 					color: rgb(142, 142, 142);
-					margin: 10px 0 0 0px;
+					margin: 10px 0 0 0;
 					font-weight: 400;
+					display: block;
+				`;
+			case "inDetail":
+				return css`
+					color: rgb(142, 142, 142);
+					margin: 10px 0 10px 10px;
+					font-weight: 400;
+					display: block;
 				`;
 			default:
 				break;
