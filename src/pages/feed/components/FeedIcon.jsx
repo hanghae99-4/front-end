@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import A from "../../../common/A";
 import Div from "../../../common/Div";
 import Svg from "../../../common/Svg";
-import { __getFeed, __likeThunk } from "../../../redux/modules/likeSlice";
+import {
+	__followThunk,
+	__getFeed,
+	__likeThunk,
+} from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
 const FeedIcon = () => {
@@ -12,8 +16,9 @@ const FeedIcon = () => {
 
 	const onClickLike = () => {
 		console.log("LikeBtn");
-		dispatch(__getFeed(2));
-		dispatch(__likeThunk(2));
+		// dispatch(__getFeed(2));
+		// dispatch(__followThunk("testid1234"));
+		dispatch(__likeThunk(3));
 		setIsLike(!isLike);
 	};
 
