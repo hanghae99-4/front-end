@@ -19,6 +19,7 @@ const StA = styled.a`
 	text-transform: inherit;
 	float: left;
 	font-weight: 600;
+	cursor: pointer;
 
 	${({ variant }) => {
 		switch (variant) {

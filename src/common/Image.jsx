@@ -28,6 +28,7 @@ const Image = ({ variant, onClick, feedImage }) => {
 					alt=""
 					top="10px"
 					left="-5px"
+					style={{ cursor: "pointer" }}
 				/>
 			);
 		case "profileDefaultIconBig":
@@ -110,6 +111,24 @@ const Image = ({ variant, onClick, feedImage }) => {
 					transform="translate(-50%, -50%)"
 					object-position="center"
 					background-position="center"
+					style={{ cursor: "pointer" }}
+				/>
+			);
+		case "feedImgDeital":
+			return (
+				<img
+					src={feedImage}
+					// position="absolute"
+					sizes="800px"
+					// sizes="472px"
+					alt=""
+					width="100%"
+					// height="100%"
+					object-fit="contain"
+					// transform="translate(-50%, -50%)"
+					object-position="center"
+					// background-position="center"
+					// style={{ cursor: "pointer" }}
 				/>
 			);
 		default:

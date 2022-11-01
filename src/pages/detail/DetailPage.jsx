@@ -16,9 +16,21 @@ const DetailPage = () => {
 	const token = localStorage.getItem("token").replace("Bearer ", "");
 	let decode = jwt_decode(token);
 	const myId = decode.sub;
-	const Author = "dbsqhfk123";
+	const Author = "testid1234";
 
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
+	const feedItem = useSelector(state => state.feedSlice.feedItem);
+	const {
+		feedId,
+		feedImage,
+		contents,
+		heartByMe,
+		heartNum,
+		memberId,
+		nickname,
+		username,
+	} = feedItem;
+	console.log("feedImage =>", feedImage);
 	const dispatch = useDispatch();
 	const CloseModal = () => {
 		dispatch(updateDetailModalOpen());
@@ -36,8 +48,8 @@ const DetailPage = () => {
 					</Div>
 					<Div variant="modalContents">
 						{/* 사진영역 */}
-						<Div variant="uploadImageArea">
-							<Div variant="sampleInEditor" />
+						<Div variant="detailImageArea">
+							<Image variant="feedImgDeital" feedImage={feedImage} />
 						</Div>
 						{/* 게시글 내용 및 댓글 영역 */}
 						<Div variant="detailContentLayout">
@@ -47,7 +59,7 @@ const DetailPage = () => {
 									<Margin margin="0 12px 0 16px">
 										<Image variant="profileDefaultIconMid" />
 									</Margin>
-									<A variant="noMargin">user_nickname</A>
+									<A variant="noMargin">{nickname}</A>
 									{myId === Author ? (
 										<BtnBox>
 											<Button variant="smallWhite">수정</Button>
@@ -58,8 +70,8 @@ const DetailPage = () => {
 								{/* 게시글 내용 - 존재하지 않으면 null반환하도록 추가 꼭하기*/}
 								<Div variant="detailContent">
 									<Image variant="profileDefaultIconMid"></Image>
-									<A>userNickname</A>
-									<Text>우리집 고양이는 바깥 구경을 좋아해요!</Text>
+									<A>{nickname}</A>
+									<Text>{contents}</Text>
 								</Div>
 								{/* 댓글목록 */}
 								<Margin margin="10px 0" />
