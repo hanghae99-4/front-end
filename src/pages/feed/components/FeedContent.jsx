@@ -8,7 +8,7 @@ import Button from "../../../common/Button";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 import { useDispatch } from "react-redux";
 
-const FeedContent = ({ userNickname }) => {
+const FeedContent = ({ nickname, contents }) => {
 	const dispatch = useDispatch();
 	const OpenModal = () => {
 		dispatch(updateDetailModalOpen());
@@ -17,9 +17,9 @@ const FeedContent = ({ userNickname }) => {
 		<>
 			<Div variant="contentArea">
 				<NicknameWrap>
-					<A variant="noMargin">{userNickname}</A>
+					<A variant="noMargin">{nickname}</A>
 				</NicknameWrap>
-				<Text>우리집 고양이는 바깥 구경을 좋아해요!</Text>
+				<Text>{contents}</Text>
 				<A variant="comment" onClick={OpenModal}>
 					댓글 5개 모두 보기
 				</A>
