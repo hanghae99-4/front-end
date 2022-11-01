@@ -4,12 +4,7 @@ import A from "../../../common/A";
 import Div from "../../../common/Div";
 import Svg from "../../../common/Svg";
 import { getFeedItem } from "../../../redux/modules/feedSlice";
-import {
-	__changeThunk,
-	__followThunk,
-	__getFeed,
-	__likeThunk,
-} from "../../../redux/modules/likeSlice";
+import { __changeThunk, __likeThunk } from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
 const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
@@ -27,13 +22,15 @@ const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 		console.log("openModal");
 		dispatch(updateDetailModalOpen());
 	};
+
+	useEffect(() => {});
+
 	return (
 		<>
 			<Div variant="iconArea">
 				<Svg
-					variant={isLike ? "cancelLike" : "like"}
-					isLike={isLike}
-					setIsLike={setIsLike}
+					variant={heartByMe ? "cancelLike" : "like"}
+					heartByMe={heartByMe}
 					onClick={onClickLike}
 				/>
 				<Svg

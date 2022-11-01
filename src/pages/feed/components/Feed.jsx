@@ -18,6 +18,7 @@ const Feed = ({ feedItem }) => {
 		memberId,
 		nickname,
 		heartNum,
+		commentsList,
 	} = feedItem;
 
 	const dispatch = useDispatch();
@@ -53,10 +54,12 @@ const Feed = ({ feedItem }) => {
 			/>
 			{/* Feed content */}
 			<FeedContent
+				feedId={feedId}
 				memberId={memberId}
 				feedItem={feedItem}
 				contents={contents}
 				nickname={nickname}
+				commentsList={commentsList}
 			/>
 		</Div>
 	);

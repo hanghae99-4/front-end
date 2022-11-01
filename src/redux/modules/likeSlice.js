@@ -14,6 +14,7 @@ const initialState = {
 	isChanged: false,
 };
 
+// 특정 피드 조회
 export const __getFeed = createAsyncThunk(
 	"feed/getFeed",
 	async (feedId, thunkAPI) => {
@@ -33,6 +34,7 @@ export const __getFeed = createAsyncThunk(
 	},
 );
 
+// 좋아요
 export const __likeThunk = createAsyncThunk(
 	"feed/like",
 	async (feedId, thunkAPI) => {
@@ -47,6 +49,7 @@ export const __likeThunk = createAsyncThunk(
 	},
 );
 
+// 리렌더링
 export const __changeThunk = createAsyncThunk(
 	"feed/change",
 	async (payload, thunkAPI) => {
@@ -55,6 +58,7 @@ export const __changeThunk = createAsyncThunk(
 	},
 );
 
+// 팔로우
 export const __followThunk = createAsyncThunk(
 	"feed/like",
 	async (toMemberId, thunkAPI) => {

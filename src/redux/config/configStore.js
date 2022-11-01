@@ -3,7 +3,7 @@ import modalSlice from "../modules/modalSlice";
 import users from "../modules/usersSlice";
 import feedSlice from "../modules/feedSlice";
 import like from "../modules/likeSlice";
-
+import comments from "../modules/commentSlice";
 
 const store = configureStore({
 	reducer: {
@@ -11,6 +11,7 @@ const store = configureStore({
 		modalSlice,
 		feedSlice,
 		like,
+		comments,
 	},
 });
 

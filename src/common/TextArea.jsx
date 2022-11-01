@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const TextArea = ({ ...props }) => {
+const TextArea = ({ value, ...props }) => {
 	return <StTextArea {...props}></StTextArea>;
 };
 export default TextArea;
@@ -36,6 +36,7 @@ const StTextArea = styled.textarea`
 					border-radius: 5px;
 					position: relative;
 					vertical-align: baseline;
+					value: 
 					::placeholder {
 						color: #8d949e;
 					}

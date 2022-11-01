@@ -1,14 +1,9 @@
 import styled, { css } from "styled-components";
 
-const Svg = ({ variant, isLike, setIsLike, onClick }) => {
+const Svg = ({ variant, onClick }) => {
 	return (
 		<IconWrap>
-			<IconSvg
-				variant={variant}
-				isLike={isLike}
-				setIsLike={setIsLike}
-				onClick={onClick}
-			></IconSvg>
+			<IconSvg variant={variant} onClick={onClick}></IconSvg>
 		</IconWrap>
 	);
 };
