@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+//URL
+const BASE_URL = process.env.REACT_APP_SERVER;
+
 //token
 const token = localStorage.getItem("token");
 const refreshToken = localStorage.getItem("refresh-token");
@@ -8,21 +11,19 @@ const refreshToken = localStorage.getItem("refresh-token");
 // InitialState
 const initialState = {
 	Post: [],
+	isChanged: false,
 };
 
 export const __getFeed = createAsyncThunk(
 	"feed/getFeed",
 	async (feedId, thunkAPI) => {
-		const response = await axios.get(
-			`http://13.125.198.85:8080/feeds/${feedId}`,
-			{
-				headers: {
-					Authorization: token,
-					"Refresh-Token": refreshToken,
-					"Content-Type": "application/json",
-				},
+		const response = await axios.get(`${BASE_URL}/feeds`, {
+			headers: {
+				Authorization: token,
+				"Refresh-Token": refreshToken,
+				"Content-Type": "application/json",
 			},
-		);
+		});
 		console.log(response);
 		if (response.data.success === true) {
 			return response.data.data;
@@ -35,21 +36,43 @@ export const __getFeed = createAsyncThunk(
 export const __likeThunk = createAsyncThunk(
 	"feed/like",
 	async (feedId, thunkAPI) => {
+		console.log(feedId);
+		const response = await axios.get(`${BASE_URL}/feeds/${feedId}/heart`, {
+			headers: {
+				Authorization: token,
+				"Refresh-Token": refreshToken,
+				"Content-Type": "application/json",
+			},
+		});
+		console.log(response);
+		return thunkAPI.fulfillWithValue(response.data);
+	},
+);
+
+export const __changeThunk = createAsyncThunk(
+	"feed/change",
+	async (payload, thunkAPI) => {
+		await console.log("something changed");
+		return thunkAPI.fulfillWithValue();
+	},
+);
+
+export const __followThunk = createAsyncThunk(
+	"feed/like",
+	async (toMemberId, thunkAPI) => {
+		console.log(toMemberId);
 		try {
-			const response = await axios.post(
-				`http://13.125.198.85:8080/feeds/${feedId}/heart`,
-				{
-					headers: {
-						Authorization: token,
-						"Refresh-Token": refreshToken,
-						"Content-Type": "application/json",
-					},
+			const response = await axios.get(`${BASE_URL}/follow/${toMemberId}`, {
+				headers: {
+					Authorization: token,
+					"Refresh-Token": refreshToken,
+					"Content-Type": "application/json",
 				},
-			);
+			});
 			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response.data);
+			return console.log(error);
 		}
 	},
 );
@@ -64,6 +87,12 @@ export const likeSlice = createSlice({
 		},
 		[__likeThunk.fulfilled]: (state, action) => {
 			console.log(state.post);
+		},
+		[__changeThunk.pending]: (state, action) => {
+			state.isChanged = true;
+		},
+		[__changeThunk.fulfilled]: (state, action) => {
+			state.isChanged = false;
 		},
 	},
 });
