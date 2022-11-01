@@ -202,6 +202,16 @@ const StDiv = styled.div`
 					position: relative;
 					flex-direction: column;
 				`;
+			case "CommentList":
+				return css`
+					height: auto;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-self: flex-start;
+					::-webkit-scrollbar {
+						display: none;
+					}
+				`;
 
 			// 프로필 페이지
 			case "profileInfoArea":

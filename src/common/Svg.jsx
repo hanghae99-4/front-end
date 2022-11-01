@@ -71,6 +71,9 @@ const IconWrap = styled.div`
 	position: relative;
 	margin-right: 15px;
 	margin-top: 7px;
+	:hover {
+		opacity: 0.5;
+	}
 `;
 
 export default Svg;

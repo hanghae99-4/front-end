@@ -22,7 +22,7 @@ export const __signinThunk = createAsyncThunk(
 			localStorage.setItem("token", data.headers.authorization);
 			localStorage.setItem("refresh-token", data.headers["refresh-token"]);
 			if (data.data.success === true) {
-				alert("환영합니다!");
+				alert(`환영합니다!`);
 				window.location.reload();
 			}
 			return thunkAPI.fulfillWithValue(data.data);
@@ -63,6 +63,8 @@ export const __checkIdThunk = createAsyncThunk(
 			);
 			if (data.data.success === true) {
 				alert(`${data.data.data}`);
+			} else if (data.data.success === false) {
+				alert("사용 중인 ID입니다.");
 			}
 			return console.log(data.data);
 		} catch (error) {
@@ -76,13 +78,14 @@ export const __checkNicknameThunk = createAsyncThunk(
 	"users/signup/checkNickname",
 	async (nickname, thunkAPI) => {
 		try {
-			const checkNickname = { nickname: nickname };
-			console.log(checkNickname);
+			console.log(nickname);
 			const data = await axios.get(
 				`http://13.125.198.85:8080/signup/checknickname/${nickname}`,
 			);
 			if (data.data.success === true) {
-				alert("사용 가능한 닉네임입니다");
+				alert(`${data.data.data}`);
+			} else if (data.data.success === false) {
+				alert("사용 중인 닉네임입니다.");
 			}
 			return console.log(data.data);
 		} catch (error) {
