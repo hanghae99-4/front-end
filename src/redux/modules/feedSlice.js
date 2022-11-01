@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateDetailModalOpen } from "./modalSlice";
 const BASE_URL = process.env.REACT_APP_SERVER;
 const token = localStorage.getItem("token");
 
@@ -8,6 +10,7 @@ const initialState = {
 	feedItem: {},
 	mainFeedList: [],
 	proFileFeedList: [],
+	isLoading: false,
 };
 
 // 포스팅
@@ -71,6 +74,23 @@ export const __getMainFeedList = createAsyncThunk(
 	},
 );
 
+// 게시물 삭제
+export const __delFeedItem = createAsyncThunk(
+	"feed/delFeedItem",
+	async (payload, thunkAPI) => {
+		try {
+			const response = await axios.delete(`${BASE_URL}/feeds/${payload}`, {
+				headers: {
+					Authorization: token,
+				},
+			});
+			return thunkAPI.fulfillWithValue(response.data);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	},
+);
+
 // 슬라이스
 export const feedSlice = createSlice({
 	name: "feed",
@@ -78,7 +98,6 @@ export const feedSlice = createSlice({
 	reducers: {
 		// feedItem state 관리
 		getFeedItem: (state, action) => {
-			console.log("state변경");
 			state.feedItem = action.payload;
 		},
 	},
@@ -111,6 +130,21 @@ export const feedSlice = createSlice({
 		},
 		[__getMainFeedList.rejected]: (state, action) => {
 			// console.log("@ __getMainFeedList rejected", action.payload);
+		},
+
+		// 게시물 삭제
+		[__delFeedItem.fulfilled]: (state, action) => {
+			console.log("@ __delFeedItem fullfilled", action.payload);
+			if (action.payload.success === false) {
+				alert("작성자가 일치하지 않습니다.");
+			}
+			// hook은 여기서 못 부름
+			// const dispatch = useDispatch();
+			// dispatch(updateDetailModalOpen());
+			state.isLoading = true;
+		},
+		[__delFeedItem.rejected]: (state, action) => {
+			console.log("@ __delFeedItem rejected", action.payload);
 		},
 	},
 });
