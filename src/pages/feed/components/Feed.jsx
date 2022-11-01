@@ -4,6 +4,9 @@ import Image from "../../../common/Image";
 import A from "../../../common/A";
 import FeedContent from "./FeedContent";
 import FeedIcon from "./FeedIcon";
+import { useDispatch } from "react-redux";
+import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
+import { getFeedItem } from "../../../redux/modules/feedSlice";
 
 const Feed = ({ feedItem }) => {
 	const {
@@ -16,6 +19,12 @@ const Feed = ({ feedItem }) => {
 		heartNum,
 	} = feedItem;
 
+	const dispatch = useDispatch();
+
+	const OpenModal = () => {
+		dispatch(updateDetailModalOpen());
+	};
+
 	return (
 		<Div variant="feedBox">
 			{/* Feed Header */}
@@ -24,7 +33,14 @@ const Feed = ({ feedItem }) => {
 				<A>{nickname}</A>
 			</Div>
 			{/* Feed Img */}
-			<Image feedImage={feedImage} variant="feedImg"></Image>
+			<Image
+				onClick={() => {
+					dispatch(getFeedItem(feedItem));
+					OpenModal();
+				}}
+				feedImage={feedImage}
+				variant="feedImg"
+			></Image>
 			{/* Feed Icon & Like count*/}
 			<FeedIcon
 				feedId={feedId}

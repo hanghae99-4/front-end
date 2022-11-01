@@ -118,6 +118,18 @@ const StDiv = styled.div`
 					gap: 30px;
 					border-right: 1px solid #dbdbdb;
 				`;
+			case "detailImageArea":
+				return css`
+					height: 100%;
+					width: 100%;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 30px;
+					border-right: 1px solid #dbdbdb;
+					background-color: black;
+					overflow: hidden;
+				`;
 			case "modalPostion":
 				return css`
 					justify-content: center;
@@ -137,13 +149,16 @@ const StDiv = styled.div`
 			case "modalContainer":
 				return css`
 					position: absolute;
-					width: 80vw;
-					max-width: 1200px;
-					height: 80vh;
+					/* width: 80vw;
+					max-width: 1200px; */
+					/* height: 80vh; */
+					width: 850px;
+					height: 550px;
 					justify-content: center;
 					flex-direction: column;
 					background-color: #ffffff;
 					text-align: center;
+					border-radius: 5px;
 				`;
 			case "detailPostion":
 				return css`
@@ -238,7 +253,9 @@ const StDiv = styled.div`
 				return css`
 					width: 100%;
 					height: 100%;
-					background-image: url("/images/sample.jpg");
+					/* background-image: url(https://instakilogram.s3.ap-northeast-2.amazonaws.com/feeds/14e3fe74-0e51-45b6-8f5c-2d4400d09305jinseok); */
+					/* background-image: url(https://m.yooamarket.com/web/product/big/201512/643_shop1_231431.jpg); */
+					/* background-image: url(feedImage); */
 					background-size: cover;
 				`;
 
