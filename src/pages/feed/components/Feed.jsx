@@ -3,7 +3,6 @@ import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import A from "../../../common/A";
 import FeedContent from "./FeedContent";
-import FeedLike from "./FeedLike";
 import FeedIcon from "./FeedIcon";
 
 const Feed = () => {
@@ -20,10 +19,8 @@ const Feed = () => {
 			<Div>
 				<Image variant="feedImg"></Image>
 			</Div>
-			{/* Feed Icon */}
+			{/* Feed Icon & Like count*/}
 			<FeedIcon />
-			{/* Feed Like */}
-			<FeedLike />
 			{/* Feed content */}
 			<FeedContent userNickname={userNickname} />
 		</Div>
