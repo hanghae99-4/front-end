@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-	updateDetailModalOpen,
-	updateIsEditorModalOpen,
-} from "../../redux/modules/modalSlice";
+import { updateDetailModalOpen } from "../../redux/modules/modalSlice";
 import Button from "../../common/Button";
 import Div from "../../common/Div";
 import Image from "../../common/Image";
@@ -14,8 +11,14 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import FeedLike from "../feed/components/FeedLike";
 import TextArea from "../../common/TextArea";
+import jwt_decode from "jwt-decode";
 
 const DetailPage = () => {
+	const token = localStorage.getItem("token").replace("Bearer ", "");
+	let decode = jwt_decode(token);
+	const myId = decode.sub;
+	const Author = "dbsqhfk123";
+
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const dispatch = useDispatch();
 	const CloseModal = () => {
@@ -46,10 +49,12 @@ const DetailPage = () => {
 										<Image variant="profileDefaultIconMid" />
 									</Margin>
 									<A variant="noMargin">user_nickname</A>
-									<BtnBox>
-										<Button variant="smallWhite">수정</Button>
-										<Button variant="smallWhite">삭제</Button>
-									</BtnBox>
+									{myId === Author ? (
+										<BtnBox>
+											<Button variant="smallWhite">수정</Button>
+											<Button variant="smallWhite">삭제</Button>
+										</BtnBox>
+									) : null}
 								</Div>
 								{/* 게시글 내용 - 존재하지 않으면 null반환하도록 추가 꼭하기*/}
 								<Div variant="detailContent">
@@ -59,9 +64,11 @@ const DetailPage = () => {
 								</Div>
 								{/* 댓글목록 */}
 								<Margin margin="10px 0" />
-								<Comment />
-								<Comment />
-								<Comment />
+								<Div variant="CommentList">
+									<Comment />
+									<Comment />
+									<Comment />
+								</Div>
 							</Div>
 							{/* 댓글 작성 영역 */}
 							<Div variant="writeComment">

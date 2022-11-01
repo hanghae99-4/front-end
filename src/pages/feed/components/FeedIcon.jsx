@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import Div from "../../../common/Div";
 import Svg from "../../../common/Svg";
+import { __likeThunk } from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
 const FeedIcon = () => {
+	const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(false);
 
 	const onClickLike = () => {
 		console.log("LikeBtn");
+		// dispatch(__likeThunk(1));
 		setIsLike(!isLike);
 	};
-	const dispatch = useDispatch();
+
 	const OpenModal = () => {
 		console.log("openModal");
 		dispatch(updateDetailModalOpen());
