@@ -16,8 +16,6 @@ const Feed = ({ feedItem }) => {
 		heartNum,
 	} = feedItem;
 
-	const userNickname = "user_nickname";
-
 	return (
 		<Div variant="feedBox">
 			{/* Feed Header */}
@@ -28,7 +26,12 @@ const Feed = ({ feedItem }) => {
 			{/* Feed Img */}
 			<Image feedImage={feedImage} variant="feedImg"></Image>
 			{/* Feed Icon & Like count*/}
-			<FeedIcon />
+			<FeedIcon
+				feedId={feedId}
+				memberId={memberId}
+				heartByMe={heartByMe}
+				heartNum={heartNum}
+			/>
 			{/* Feed content */}
 			<FeedContent contents={contents} nickname={nickname} />
 		</Div>
