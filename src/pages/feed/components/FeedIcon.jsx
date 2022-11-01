@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import A from "../../../common/A";
 import Div from "../../../common/Div";
 import Svg from "../../../common/Svg";
+import { getFeedItem } from "../../../redux/modules/feedSlice";
 import {
 	__changeThunk,
 	__followThunk,
@@ -11,7 +12,7 @@ import {
 } from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
-const FeedIcon = ({ feedId, memberId, heartByMe, heartNum }) => {
+const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 	const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(heartByMe);
 
@@ -22,7 +23,7 @@ const FeedIcon = ({ feedId, memberId, heartByMe, heartNum }) => {
 		setIsLike(!isLike);
 	};
 
-	const OpenModal = ({ feedId, heartByMe, heartNum }) => {
+	const OpenModal = () => {
 		console.log("openModal");
 		dispatch(updateDetailModalOpen());
 	};
@@ -35,7 +36,13 @@ const FeedIcon = ({ feedId, memberId, heartByMe, heartNum }) => {
 					setIsLike={setIsLike}
 					onClick={onClickLike}
 				/>
-				<Svg variant="comment" onClick={OpenModal} />
+				<Svg
+					variant="comment"
+					onClick={() => {
+						dispatch(getFeedItem(feedItem));
+						OpenModal();
+					}}
+				/>
 			</Div>
 			<Div variant="likeArea">
 				<A>좋아요 {heartNum}개</A>

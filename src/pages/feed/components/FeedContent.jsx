@@ -7,9 +7,13 @@ import TextArea from "../../../common/TextArea";
 import Button from "../../../common/Button";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 import { useDispatch } from "react-redux";
+import { getFeedItem } from "../../../redux/modules/feedSlice";
+import { useNavigate } from "react-router-dom";
 
-const FeedContent = ({ nickname, contents }) => {
+const FeedContent = ({ feedItem, nickname, contents, memberId }) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const OpenModal = () => {
 		dispatch(updateDetailModalOpen());
 	};
@@ -17,10 +21,18 @@ const FeedContent = ({ nickname, contents }) => {
 		<>
 			<Div variant="contentArea">
 				<NicknameWrap>
-					<A variant="noMargin">{nickname}</A>
+					<A variant="noMargin" onClick={() => navigate(`/${memberId}`)}>
+						{memberId}
+					</A>
 				</NicknameWrap>
 				<Text>{contents}</Text>
-				<A variant="comment" onClick={OpenModal}>
+				<A
+					variant="comment"
+					onClick={() => {
+						dispatch(getFeedItem(feedItem));
+						OpenModal();
+					}}
+				>
 					댓글 5개 모두 보기
 				</A>
 			</Div>

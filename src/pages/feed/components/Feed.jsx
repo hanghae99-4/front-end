@@ -7,6 +7,7 @@ import FeedIcon from "./FeedIcon";
 import { useDispatch } from "react-redux";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 import { getFeedItem } from "../../../redux/modules/feedSlice";
+import { useNavigate } from "react-router-dom";
 
 const Feed = ({ feedItem }) => {
 	const {
@@ -20,6 +21,7 @@ const Feed = ({ feedItem }) => {
 	} = feedItem;
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const OpenModal = () => {
 		dispatch(updateDetailModalOpen());
@@ -30,7 +32,7 @@ const Feed = ({ feedItem }) => {
 			{/* Feed Header */}
 			<Div variant="feedHeader">
 				<Image variant="profileDefaultIconMid"></Image>
-				<A>{nickname}</A>
+				<A onClick={() => navigate(`/${memberId}`)}>{memberId}</A>
 			</Div>
 			{/* Feed Img */}
 			<Image
@@ -43,13 +45,19 @@ const Feed = ({ feedItem }) => {
 			></Image>
 			{/* Feed Icon & Like count*/}
 			<FeedIcon
+				feedItem={feedItem}
 				feedId={feedId}
 				memberId={memberId}
 				heartByMe={heartByMe}
 				heartNum={heartNum}
 			/>
 			{/* Feed content */}
-			<FeedContent contents={contents} nickname={nickname} />
+			<FeedContent
+				memberId={memberId}
+				feedItem={feedItem}
+				contents={contents}
+				nickname={nickname}
+			/>
 		</Div>
 	);
 };

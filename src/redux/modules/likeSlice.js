@@ -36,7 +36,6 @@ export const __getFeed = createAsyncThunk(
 export const __likeThunk = createAsyncThunk(
 	"feed/like",
 	async (feedId, thunkAPI) => {
-		console.log(feedId);
 		const response = await axios.get(`${BASE_URL}/feeds/${feedId}/heart`, {
 			headers: {
 				Authorization: token,
@@ -44,7 +43,6 @@ export const __likeThunk = createAsyncThunk(
 				"Content-Type": "application/json",
 			},
 		});
-		console.log(response);
 		return thunkAPI.fulfillWithValue(response.data);
 	},
 );
@@ -86,7 +84,7 @@ export const likeSlice = createSlice({
 			state.post = action.payload;
 		},
 		[__likeThunk.fulfilled]: (state, action) => {
-			console.log(state.post);
+			console.log(action.payload);
 		},
 		[__changeThunk.pending]: (state, action) => {
 			state.isChanged = true;

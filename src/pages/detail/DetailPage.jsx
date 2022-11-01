@@ -71,7 +71,7 @@ const DetailPage = () => {
 								<Div variant="detailContent">
 									<Image variant="profileDefaultIconMid"></Image>
 									<A>{nickname}</A>
-									<Text>{contents}</Text>
+									{contents && <Text>{contents}</Text>}
 								</Div>
 								{/* 댓글목록 */}
 								<Margin margin="10px 0" />

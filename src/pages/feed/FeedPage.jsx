@@ -7,7 +7,6 @@ import Feed from "./components/Feed";
 
 function FeedPage() {
 	const dispatch = useDispatch();
-
 	const mainFeedList = useSelector(state => state.feedSlice.mainFeedList);
 	const isLikeChanged = useSelector(state => state.like.isChanged);
 
@@ -22,8 +21,6 @@ function FeedPage() {
 				{mainFeedList.map(feedItem => (
 					<Feed key={feedItem.feedId} feedItem={feedItem} />
 				))}
-				{/* <Feed />
-				<Feed /> */}
 			</Layout>
 		</>
 	);
