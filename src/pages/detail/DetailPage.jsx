@@ -11,6 +11,7 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
+import { __delFeedItem } from "../../redux/modules/feedSlice";
 
 const DetailPage = () => {
 	const token = localStorage.getItem("token").replace("Bearer ", "");
@@ -20,6 +21,8 @@ const DetailPage = () => {
 
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
+	const isLoading = useSelector(state => state.feedSlice.isLoading);
+
 	const {
 		feedId,
 		feedImage,
@@ -30,7 +33,6 @@ const DetailPage = () => {
 		nickname,
 		username,
 	} = feedItem;
-	console.log("feedImage =>", feedImage);
 	const dispatch = useDispatch();
 	const CloseModal = () => {
 		dispatch(updateDetailModalOpen());
@@ -63,7 +65,14 @@ const DetailPage = () => {
 									{myId === Author ? (
 										<BtnBox>
 											<Button variant="smallWhite">수정</Button>
-											<Button variant="smallWhite">삭제</Button>
+											<Button
+												onClick={() => {
+													dispatch(__delFeedItem(feedId));
+												}}
+												variant="smallWhite"
+											>
+												삭제
+											</Button>
 										</BtnBox>
 									) : null}
 								</Div>
