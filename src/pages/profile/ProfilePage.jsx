@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import Layout from "../../common/Layout";
-import DetailPage from "../detail/DetailPage";
 import ProfileFeedsArea from "./components/ProfileFeedsArea";
 import ProfilePageHeader from "./components/ProfilePageHeader";
 

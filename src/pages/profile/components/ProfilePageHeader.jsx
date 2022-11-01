@@ -1,10 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../common/Button";
 import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
+import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
 
 function ProfilePageHeader() {
+	const dispatch = useDispatch();
+	// const { username, nickname, follower, follow } = useSelector(
+	// 	state => state.feedSlice.profileFeedList,
+	// );
+	// console.log(username, nickname, follower, follow);
+
+	useEffect(() => {
+		// dispatch(__getProFileFeedList());
+		dispatch(__getProFileFeedList("ckd12394"));
+	}, []);
+
 	return (
 		<Layout variant="profilePageHeaderLayout">
 			{/* 프로필 이미지 */}

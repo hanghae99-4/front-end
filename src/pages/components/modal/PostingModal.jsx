@@ -11,33 +11,41 @@ import { __addFeed } from "../../../redux/modules/feedSlice";
 function PostingModal() {
 	const isModalOpen = useSelector(state => state.modalSlice.isModalOpen);
 	const dispatch = useDispatch();
-	const [imgUrl, setImgUrl] = useState(null);
-	const [text, setText] = useState("");
-	const formData = new FormData();
 	const imgInput = useRef();
+	const [post, setPost] = useState({ image: "", contents: "" });
 
-	// 이미지
+	// 이미지 state
+	const [UploadImageForm, setUploadImageForm] = useState(null);
+	const [previewImage, setPreviewImage] = useState(null);
+	const [imgUrl, setImgUrl] = useState(null);
+
+	// 이미지 첨부
 	const handleImgChange = e => {
-		// formData 생성
-		const img = e.target.files[0];
-		if (!img) return;
-		formData.append("imgage", img);
+		setUploadImageForm(e.target.files[0]);
 
 		// 미리보기
 		const reader = new FileReader();
-		reader.readAsDataURL(img);
-		reader.onload = () => setImgUrl(reader.result);
+		if (e.target.files[0]) {
+			reader.readAsDataURL(e.target.files[0]);
+		}
+		reader.onload = () => {
+			const previewImgUrl = reader.result;
+			setImgUrl(previewImgUrl);
+			if (previewImgUrl) {
+				setPreviewImage(previewImgUrl);
+			}
+		};
 	};
 
 	// 본문
-	const handleTxtChange = e => {
-		setText(e.target.value);
+	const handleSetPost = e => {
+		const value = e.target.value;
+		setPost({ ...post, image: UploadImageForm, contents: value });
 	};
 
 	// 업로드
 	const handleUpload = () => {
-		formData.append("contents", text);
-		dispatch(__addFeed(formData));
+		dispatch(__addFeed(post));
 	};
 
 	if (!isModalOpen) return null;
@@ -127,7 +135,7 @@ function PostingModal() {
 
 								{/* 작성 영역 */}
 								<TextArea
-									onChange={handleTxtChange}
+									onChange={handleSetPost}
 									variant="modalWrite"
 									placeholder="문구 입력..."
 								/>
