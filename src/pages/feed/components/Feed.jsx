@@ -25,8 +25,6 @@ const Feed = ({ feedItem }) => {
 		dispatch(updateDetailModalOpen());
 	};
 
-	const userNickname = "user_nickname";
-
 	return (
 		<Div variant="feedBox">
 			{/* Feed Header */}
@@ -44,7 +42,12 @@ const Feed = ({ feedItem }) => {
 				variant="feedImg"
 			></Image>
 			{/* Feed Icon & Like count*/}
-			<FeedIcon />
+			<FeedIcon
+				feedId={feedId}
+				memberId={memberId}
+				heartByMe={heartByMe}
+				heartNum={heartNum}
+			/>
 			{/* Feed content */}
 			<FeedContent contents={contents} nickname={nickname} />
 		</Div>

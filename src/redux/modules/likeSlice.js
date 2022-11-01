@@ -11,6 +11,7 @@ const refreshToken = localStorage.getItem("refresh-token");
 // InitialState
 const initialState = {
 	Post: [],
+	isChanged: false,
 };
 
 export const __getFeed = createAsyncThunk(
@@ -48,6 +49,14 @@ export const __likeThunk = createAsyncThunk(
 	},
 );
 
+export const __changeThunk = createAsyncThunk(
+	"feed/change",
+	async (payload, thunkAPI) => {
+		await console.log("something changed");
+		return thunkAPI.fulfillWithValue();
+	},
+);
+
 export const __followThunk = createAsyncThunk(
 	"feed/like",
 	async (toMemberId, thunkAPI) => {
@@ -78,6 +87,12 @@ export const likeSlice = createSlice({
 		},
 		[__likeThunk.fulfilled]: (state, action) => {
 			console.log(state.post);
+		},
+		[__changeThunk.pending]: (state, action) => {
+			state.isChanged = true;
+		},
+		[__changeThunk.fulfilled]: (state, action) => {
+			state.isChanged = false;
 		},
 	},
 });
