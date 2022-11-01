@@ -6,18 +6,17 @@ import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
 import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
+import { __followThunk } from "../../../redux/modules/likeSlice";
 
-function ProfilePageHeader() {
+function ProfilePageHeader({ memberId }) {
 	const dispatch = useDispatch();
-	// const { username, nickname, follower, follow } = useSelector(
-	// 	state => state.feedSlice.profileFeedList,
+	// const userinfo = useSelector(state =>
+	// 	console.log(state.feedSlice.profileFeedList),
 	// );
-	// console.log(username, nickname, follower, follow);
 
-	useEffect(() => {
-		// dispatch(__getProFileFeedList());
-		dispatch(__getProFileFeedList("ckd12394"));
-	}, []);
+	// useEffect(() => {
+	// 	dispatch(__getProFileFeedList(memberId));
+	// });
 
 	return (
 		<Layout variant="profilePageHeaderLayout">
@@ -28,9 +27,14 @@ function ProfilePageHeader() {
 			<Div variant="profileInfoArea">
 				{/* 닉네임, 팔로우 버튼 영역 */}
 				<Div variant="nicknameAndBtns">
-					<span>nickname</span>
+					<span>{memberId}</span>
 					<Margin margin="10px 0 0 0">
-						<Button variant="smallBlue">팔로우</Button>
+						<Button
+							variant="smallBlue"
+							onClick={() => dispatch(__followThunk(memberId))}
+						>
+							팔로우
+						</Button>
 					</Margin>
 				</Div>
 

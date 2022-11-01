@@ -6,7 +6,7 @@ const A = ({ children, ...props }) => {
 export default A;
 
 const StA = styled.a`
-	display: inline-block;
+	display: block;
 	border: 0;
 	padding: 0 !important;
 	align-items: inherit;
@@ -32,7 +32,6 @@ const StA = styled.a`
 					color: rgb(142, 142, 142);
 					margin: 10px 0 0 0;
 					font-weight: 400;
-					display: block;
 					cursor: pointer;
 				`;
 			case "inDetail":

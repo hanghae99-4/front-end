@@ -14,10 +14,10 @@ import jwt_decode from "jwt-decode";
 import { __delFeedItem } from "../../redux/modules/feedSlice";
 
 const DetailPage = () => {
+	//토큰 디코드
 	const token = localStorage.getItem("token").replace("Bearer ", "");
 	let decode = jwt_decode(token);
 	const myId = decode.sub;
-	const Author = "testid1234";
 
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
@@ -32,11 +32,14 @@ const DetailPage = () => {
 		memberId,
 		nickname,
 		username,
+		commentsList,
 	} = feedItem;
 	const dispatch = useDispatch();
 	const CloseModal = () => {
 		dispatch(updateDetailModalOpen());
 	};
+
+	const Author = `${memberId}`;
 
 	if (!isDetailOpen) return null;
 
@@ -61,7 +64,7 @@ const DetailPage = () => {
 									<Margin margin="0 12px 0 16px">
 										<Image variant="profileDefaultIconMid" />
 									</Margin>
-									<A variant="noMargin">{nickname}</A>
+									<A variant="noMargin">{memberId}</A>
 									{myId === Author ? (
 										<BtnBox>
 											<Button variant="smallWhite">수정</Button>
@@ -79,21 +82,25 @@ const DetailPage = () => {
 								{/* 게시글 내용 - 존재하지 않으면 null반환하도록 추가 꼭하기*/}
 								<Div variant="detailContent">
 									<Image variant="profileDefaultIconMid"></Image>
-									<A>{nickname}</A>
-									<Text>{contents}</Text>
+									<A>{memberId}</A>
+									{contents && <Text>{contents}</Text>}
 								</Div>
 								{/* 댓글목록 */}
 								<Margin margin="10px 0" />
 								<Div variant="CommentList">
-									<Comment />
-									<Comment />
-									<Comment />
+									{commentsList.map(comment => (
+										<Comment key={comment.id} comment={comment} />
+									))}
 								</Div>
 							</Div>
 							{/* 댓글 작성 영역 */}
 							<Div variant="writeComment">
 								<LikeBox>
-									<FeedIcon />
+									<FeedIcon
+										heartByMe={heartByMe}
+										heartNum={heartNum}
+										feedId={feedId}
+									/>
 								</LikeBox>
 								<Div variant="detailCommentArea">
 									<TextArea variant="commentWrite" placeholder="댓글 달기..." />

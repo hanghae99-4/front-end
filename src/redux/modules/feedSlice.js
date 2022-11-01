@@ -9,7 +9,8 @@ const token = localStorage.getItem("token");
 const initialState = {
 	feedItem: {},
 	mainFeedList: [],
-	proFileFeedList: [],
+	profileFeedList: [],
+	profile: [],
 	isLoading: false,
 };
 
@@ -40,7 +41,7 @@ export const __addFeed = createAsyncThunk(
 	},
 );
 
-//프로필 페이지
+//프로필 페이지 리스트
 export const __getProFileFeedList = createAsyncThunk(
 	"feed/getProFileFeedList",
 	async (payload, thunkAPI) => {
@@ -50,7 +51,25 @@ export const __getProFileFeedList = createAsyncThunk(
 					Authorization: token,
 				},
 			});
-			return thunkAPI.fulfillWithValue(response.data);
+			return thunkAPI.fulfillWithValue(response.data.data);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	},
+);
+//프로필 유저 정보
+export const __getProFile = createAsyncThunk(
+	"feed/getProFile",
+	async (payload, thunkAPI) => {
+		console.log(payload);
+		try {
+			const response = await axios.get(`${BASE_URL}/${payload}`, {
+				headers: {
+					Authorization: token,
+				},
+			});
+			console.log(response);
+			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
@@ -115,7 +134,7 @@ export const feedSlice = createSlice({
 		// 프로필 페이지 조회
 		[__getProFileFeedList.fulfilled]: (state, action) => {
 			// console.log("@ __getProFileFeedList fullfilled", action.payload);
-			state.proFileFeedList = action.payload;
+			state.profileFeedList = action.payload;
 			// console.log("@ __addFeed state change", state.feedItem);
 		},
 		[__getProFileFeedList.rejected]: (state, action) => {

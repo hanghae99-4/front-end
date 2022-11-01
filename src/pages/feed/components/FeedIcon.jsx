@@ -3,15 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import A from "../../../common/A";
 import Div from "../../../common/Div";
 import Svg from "../../../common/Svg";
-import {
-	__changeThunk,
-	__followThunk,
-	__getFeed,
-	__likeThunk,
-} from "../../../redux/modules/likeSlice";
+import { getFeedItem } from "../../../redux/modules/feedSlice";
+import { __changeThunk, __likeThunk } from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
-const FeedIcon = ({ feedId, memberId, heartByMe, heartNum }) => {
+const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 	const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(heartByMe);
 
@@ -22,20 +18,28 @@ const FeedIcon = ({ feedId, memberId, heartByMe, heartNum }) => {
 		setIsLike(!isLike);
 	};
 
-	const OpenModal = ({ feedId, heartByMe, heartNum }) => {
+	const OpenModal = () => {
 		console.log("openModal");
 		dispatch(updateDetailModalOpen());
 	};
+
+	useEffect(() => {});
+
 	return (
 		<>
 			<Div variant="iconArea">
 				<Svg
-					variant={isLike ? "cancelLike" : "like"}
-					isLike={isLike}
-					setIsLike={setIsLike}
+					variant={heartByMe ? "cancelLike" : "like"}
+					heartByMe={heartByMe}
 					onClick={onClickLike}
 				/>
-				<Svg variant="comment" onClick={OpenModal} />
+				<Svg
+					variant="comment"
+					onClick={() => {
+						dispatch(getFeedItem(feedItem));
+						OpenModal();
+					}}
+				/>
 			</Div>
 			<Div variant="likeArea">
 				<A>좋아요 {heartNum}개</A>
