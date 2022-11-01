@@ -134,7 +134,7 @@ export const feedSlice = createSlice({
 
 		// 게시물 삭제
 		[__delFeedItem.fulfilled]: (state, action) => {
-			console.log("@ __delFeedItem fullfilled", action.payload);
+			// console.log("@ __delFeedItem fullfilled", action.payload);
 			if (action.payload.success === false) {
 				alert("작성자가 일치하지 않습니다.");
 			}
@@ -144,7 +144,7 @@ export const feedSlice = createSlice({
 			state.isLoading = true;
 		},
 		[__delFeedItem.rejected]: (state, action) => {
-			console.log("@ __delFeedItem rejected", action.payload);
+			// console.log("@ __delFeedItem rejected", action.payload);
 		},
 	},
 });
