@@ -5,7 +5,17 @@ import A from "../../../common/A";
 import FeedContent from "./FeedContent";
 import FeedIcon from "./FeedIcon";
 
-const Feed = () => {
+const Feed = ({ feedItem }) => {
+	const {
+		feedId,
+		feedImage,
+		contents,
+		heartByMe,
+		memberId,
+		nickname,
+		heartNum,
+	} = feedItem;
+
 	const userNickname = "user_nickname";
 
 	return (
@@ -13,16 +23,14 @@ const Feed = () => {
 			{/* Feed Header */}
 			<Div variant="feedHeader">
 				<Image variant="profileDefaultIconMid"></Image>
-				<A>{userNickname}</A>
+				<A>{nickname}</A>
 			</Div>
 			{/* Feed Img */}
-			<Div>
-				<Image variant="feedImg"></Image>
-			</Div>
+			<Image feedImage={feedImage} variant="feedImg"></Image>
 			{/* Feed Icon & Like count*/}
 			<FeedIcon />
 			{/* Feed content */}
-			<FeedContent userNickname={userNickname} />
+			<FeedContent contents={contents} nickname={nickname} />
 		</Div>
 	);
 };

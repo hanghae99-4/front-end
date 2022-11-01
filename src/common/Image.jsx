@@ -1,4 +1,4 @@
-const Image = ({ variant, onClick }) => {
+const Image = ({ variant, onClick, feedImage }) => {
 	switch (variant) {
 		case "navUpload":
 			return (
@@ -101,12 +101,11 @@ const Image = ({ variant, onClick }) => {
 			return (
 				<img
 					onClick={onClick}
-					src="/images/mycat.jpg"
+					src={feedImage}
 					position="absolute"
-					sizes="470px"
+					sizes="472px"
 					alt=""
-					width="100%"
-					height="100%"
+					width="472px"
 					object-fit="cover"
 					transform="translate(-50%, -50%)"
 					object-position="center"
