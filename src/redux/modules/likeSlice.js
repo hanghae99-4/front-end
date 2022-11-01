@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// InitialState
+//token
+const token = localStorage.getItem("token");
+const refreshToken = localStorage.getItem("refresh-token");
 
+// InitialState
 const initialState = {
 	Post: [],
 };
@@ -12,6 +15,13 @@ export const __getFeed = createAsyncThunk(
 	async (feedId, thunkAPI) => {
 		const response = await axios.get(
 			`http://13.125.198.85:8080/feeds/${feedId}`,
+			{
+				headers: {
+					Authorization: token,
+					"Refresh-Token": refreshToken,
+					"Content-Type": "application/json",
+				},
+			},
 		);
 		console.log(response);
 		if (response.data.success === true) {
@@ -26,14 +36,13 @@ export const __likeThunk = createAsyncThunk(
 	"feed/like",
 	async (feedId, thunkAPI) => {
 		try {
-			const token = localStorage.getItem("token");
-			const refreshToken = localStorage.getItem("refresh-token");
 			const response = await axios.post(
-				`http://13.125.198.85:8080/feeds/${feedId}/heart}`,
+				`http://13.125.198.85:8080/feeds/${feedId}/heart`,
 				{
 					headers: {
-						Authorization: `${token}`,
-						"refresh-token": `${refreshToken}`,
+						Authorization: token,
+						"Refresh-Token": refreshToken,
+						"Content-Type": "application/json",
 					},
 				},
 			);

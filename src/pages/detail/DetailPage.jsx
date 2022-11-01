@@ -9,7 +9,6 @@ import Text from "../../common/Text";
 import styled from "styled-components";
 import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
-import FeedLike from "../feed/components/FeedLike";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
 
@@ -74,7 +73,6 @@ const DetailPage = () => {
 							<Div variant="writeComment">
 								<LikeBox>
 									<FeedIcon />
-									<FeedLike />
 								</LikeBox>
 								<Div variant="detailCommentArea">
 									<TextArea variant="commentWrite" placeholder="댓글 달기..." />

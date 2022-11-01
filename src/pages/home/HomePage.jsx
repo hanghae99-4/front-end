@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import EditorModal from "../components/modal/EditorModal";
 
 const Homepage = () => {
-	const token = localStorage.getItem("token").replace("Bearer ", "");
+	const token = localStorage.getItem("token");
 
 	return (
 		<>
