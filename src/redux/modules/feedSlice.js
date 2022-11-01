@@ -11,6 +11,7 @@ const initialState = {
 export const __addFeed = createAsyncThunk(
 	"feed/addFeed",
 	async (payload, thunkAPI) => {
+		// console.log("@ payload =>", payload);
 		try {
 			const token = localStorage.getItem("jwtToken");
 			const response = await axios.post(`${BASE_URL}/feeds`, payload, {
@@ -34,12 +35,12 @@ export const feedSlice = createSlice({
 	extraReducers: {
 		// __addFeed
 		[__addFeed.fulfilled]: (state, action) => {
-			console.log("@ __addFeed fullfilled", action.payload);
+			// console.log("@ __addFeed fullfilled", action.payload);
 			state.feedItem = action.payload;
-			console.log("@ __addFeed state change", state.feedItem);
+			// console.log("@ __addFeed state change", state.feedItem);
 		},
 		[__addFeed.rejected]: (state, action) => {
-			console.log("@ __addFeed rejected", action.payload);
+			// console.log("@ __addFeed rejected", action.payload);
 		},
 	},
 });

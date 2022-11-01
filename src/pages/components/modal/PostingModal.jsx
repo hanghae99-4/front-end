@@ -11,40 +11,46 @@ import { __addFeed } from "../../../redux/modules/feedSlice";
 function PostingModal() {
 	const isModalOpen = useSelector(state => state.modalSlice.isModalOpen);
 	const dispatch = useDispatch();
-	const [imgFile, setImgFile] = useState({});
-	const [feedItem, setFeedItem] = useState({});
+	const [imgUrl, setImgUrl] = useState(null);
+	const [text, setText] = useState("");
+	const formData = new FormData();
 	const imgInput = useRef();
-	const reader = new FileReader();
 
+	// 이미지
 	const handleImgChange = e => {
+		// formData 생성
 		const img = e.target.files[0];
 		if (!img) return;
-		setImgFile(img);
-		const formData = new FormData();
-		formData.append("img", img, img.name);
-		setFeedItem({ image: formData });
+		formData.append("imgage", img);
+
+		// 미리보기
+		const reader = new FileReader();
+		reader.readAsDataURL(img);
+		reader.onload = () => setImgUrl(reader.result);
 	};
 
+	// 본문
 	const handleTxtChange = e => {
-		const text = e.target.value;
-		setFeedItem({ ...feedItem, contents: text });
+		setText(e.target.value);
 	};
 
+	// 업로드
 	const handleUpload = () => {
-		dispatch(__addFeed(feedItem));
+		formData.append("contents", text);
+		dispatch(__addFeed(formData));
 	};
 
 	if (!isModalOpen) return null;
 
 	return (
-		// 모달 뒷배경을 눌렀을 때 모달이 사라짐(사실 안 사라짐)
+		// 모달 뒷배경을 눌렀을 때 모달이 사라짐
 		<Div
 			variant="modalOverlay"
 			onClick={() => {
 				dispatch(updateIsModalOpen());
 			}}
 		>
-			{/* 이벤트 버블링을 막아줌(사실 안 막아줌) */}
+			{/* 이벤트 버블링을 막아줌 */}
 			<div
 				onClick={e => {
 					e.stopPropagation();
@@ -56,7 +62,7 @@ function PostingModal() {
 						variant="closeModalBtn"
 						onClick={e => {
 							dispatch(updateIsModalOpen());
-							setImgFile(null);
+							setImgUrl(null);
 						}}
 					/>
 				</Div>
@@ -74,12 +80,30 @@ function PostingModal() {
 						</Div>
 
 						{/* 모달창 컨텐츠 영역 */}
-						<Div variant="modalContents">
+						<Div
+							// style={{
+							// 	width: "100%",
+							// 	height: "100%",
+							// }}
+							variant="modalContents"
+						>
 							{/* 모달창 왼쪽: 사진 업로드 영역 */}
 							{/* 업로드 안내 또는 이미지 미리보기 */}
-							{imgFile ? (
-								<Div variant="sampleInEditor" />
+							{imgUrl ? (
+								<div
+									id="img"
+									style={{
+										width: "100%",
+										height: "100%",
+										backgroundColor: "gray",
+										backgroundImage: `url(${imgUrl})`,
+										// url(${({ogu})})
+										// `url(${instaData.postImage})`
+										backgroundSize: "cover",
+									}}
+								/>
 							) : (
+								// <Div variant="sampleInEditor" />
 								<Div variant="uploadImageArea">
 									<Image variant="uploadImageIcon" />
 									<h2>사진과 동영상을 여기에 끌어다 놓으세요</h2>
