@@ -80,13 +80,7 @@ function PostingModal() {
 						</Div>
 
 						{/* 모달창 컨텐츠 영역 */}
-						<Div
-							// style={{
-							// 	width: "100%",
-							// 	height: "100%",
-							// }}
-							variant="modalContents"
-						>
+						<Div variant="modalContents">
 							{/* 모달창 왼쪽: 사진 업로드 영역 */}
 							{/* 업로드 안내 또는 이미지 미리보기 */}
 							{imgUrl ? (
@@ -95,15 +89,12 @@ function PostingModal() {
 									style={{
 										width: "100%",
 										height: "100%",
-										backgroundColor: "gray",
 										backgroundImage: `url(${imgUrl})`,
-										// url(${({ogu})})
-										// `url(${instaData.postImage})`
 										backgroundSize: "cover",
+										backgroundPosition: "center",
 									}}
 								/>
 							) : (
-								// <Div variant="sampleInEditor" />
 								<Div variant="uploadImageArea">
 									<Image variant="uploadImageIcon" />
 									<h2>사진과 동영상을 여기에 끌어다 놓으세요</h2>
