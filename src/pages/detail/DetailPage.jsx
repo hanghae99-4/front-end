@@ -11,6 +11,7 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
+import { __delFeedItem } from "../../redux/modules/feedSlice";
 
 const DetailPage = () => {
 	//토큰 디코드
@@ -20,6 +21,8 @@ const DetailPage = () => {
 
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
+	const isLoading = useSelector(state => state.feedSlice.isLoading);
+
 	const {
 		feedId,
 		feedImage,
@@ -65,7 +68,14 @@ const DetailPage = () => {
 									{myId === Author ? (
 										<BtnBox>
 											<Button variant="smallWhite">수정</Button>
-											<Button variant="smallWhite">삭제</Button>
+											<Button
+												onClick={() => {
+													dispatch(__delFeedItem(feedId));
+												}}
+												variant="smallWhite"
+											>
+												삭제
+											</Button>
 										</BtnBox>
 									) : null}
 								</Div>
