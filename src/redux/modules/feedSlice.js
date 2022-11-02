@@ -22,18 +22,12 @@ export const __addFeed = createAsyncThunk(
 			frm.append("image", payload.image);
 			frm.append("contents", payload.contents);
 
-			// formdata 콘솔로그
-			// for (const value of frm.values()) {
-			// 	console.log("폼데이터:", value);
-			// }
-
 			const response = await axios.post(`${BASE_URL}/feeds`, frm, {
 				headers: {
 					Authorization: token,
 					"Content-Type": "multipart/form-data",
 				},
 			});
-			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -45,14 +39,12 @@ export const __addFeed = createAsyncThunk(
 export const __getProFileFeedList = createAsyncThunk(
 	"feed/getProFileFeedList",
 	async (payload, thunkAPI) => {
-		console.log(payload);
 		try {
 			const response = await axios.get(`${BASE_URL}/${payload}`, {
 				headers: {
 					Authorization: token,
 				},
 			});
-			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -64,14 +56,12 @@ export const __getProFileFeedList = createAsyncThunk(
 export const __getProFile = createAsyncThunk(
 	"feed/getProFile",
 	async (payload, thunkAPI) => {
-		console.log(payload);
 		try {
 			const response = await axios.get(`${BASE_URL}/${payload}`, {
 				headers: {
 					Authorization: token,
 				},
 			});
-			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -106,7 +96,7 @@ export const __delFeedItem = createAsyncThunk(
 					Authorization: token,
 				},
 			});
-			return thunkAPI.fulfillWithValue(response.data);
+			return thunkAPI.fulfillWithValue(payload);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
@@ -129,7 +119,7 @@ export const __updateFeedItem = createAsyncThunk(
 					},
 				},
 			);
-			return thunkAPI.fulfillWithValue(payload);
+			return thunkAPI.fulfillWithValue(response.data);
 			// return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -160,66 +150,52 @@ export const feedSlice = createSlice({
 			state.isAddFeedLoading = true;
 		},
 		[__addFeed.fulfilled]: (state, action) => {
-			// console.log("@ __addFeed fullfilled", action.payload);
+			const newFeedItem = action.payload.data;
 			alert("게시물이 공유되었습니다.");
-			// console.log("@ __addFeed state change", state.feedItem);
+			state.profileFeedList.push(newFeedItem);
+			state.mainFeedList.push(newFeedItem);
 		},
-		[__addFeed.rejected]: (state, action) => {
-			// console.log("@ __addFeed rejected", action.payload);
-		},
+		[__addFeed.rejected]: (state, action) => {},
 
 		//! 프로필 페이지 조회
 		[__getProFileFeedList.fulfilled]: (state, action) => {
-			// console.log("@ __getProFileFeedList fullfilled", action.payload);
-			state.profileFeedList = action.payload;
-			// console.log("@ __addFeed state change", state.feedItem);
+			state.profileFeedList = action.payload.feedsList;
 		},
-		[__getProFileFeedList.rejected]: (state, action) => {
-			// console.log("@ __getProFileFeedList rejected", action.payload);
-		},
+		[__getProFileFeedList.rejected]: (state, action) => {},
 
 		//! 메인 페이지 조회
 		[__getMainFeedList.fulfilled]: (state, action) => {
-			// console.log("@ __getMainFeedList fullfilled", action.payload);
 			state.mainFeedList = action.payload.data;
-			// console.log("@ __addFeed state change", state.feedItem);
 		},
-		[__getMainFeedList.rejected]: (state, action) => {
-			// console.log("@ __getMainFeedList rejected", action.payload);
-		},
+		[__getMainFeedList.rejected]: (state, action) => {},
 
 		//! 게시물 삭제
 		[__delFeedItem.fulfilled]: (state, action) => {
-			// console.log("@ __delFeedItem fullfilled", action.payload);
-			if (action.payload.success === false) {
-				alert("작성자가 일치하지 않습니다.");
-			}
-			// hook은 여기서 못 부름
-			// const dispatch = useDispatch();
-			// dispatch(updateDetailModalOpen());
-			state.isLoading = !state.isLoading;
+			state.profileFeedList = state.profileFeedList.filter(
+				feedItem => feedItem.feedId !== action.payload,
+			);
+			state.mainFeedList = state.mainFeedList.filter(
+				feedItem => feedItem.feedId !== action.payload,
+			);
 		},
-		[__delFeedItem.rejected]: (state, action) => {
-			// console.log("@ __delFeedItem rejected", action.payload);
-		},
+		[__delFeedItem.rejected]: (state, action) => {},
 
 		//! 게시물 수정
 		[__updateFeedItem.fulfilled]: (state, action) => {
-			const editedItem = action.payload.contents;
+			const editedItem = action.payload.data.contents;
 			state.feedItem = { ...state.feedItem, contents: editedItem };
-			console.log("state", state.proFileFeedList);
-			// state.profileFeedList.map(feedItem => {
-			// 	if (feedItem.feedId === action.payload.feedId) {
-			// 		feedItem = editedItem;
-			// 	}
-			// 	return feedItem;
-			// });
-			// console.log("@ __updateFeedItem fullfilled", action.payload);
-			// console.log("@ state변경", state.profileFeedList);
+			state.profileFeedList = state.profileFeedList.map(feedItem => {
+				return feedItem.feedId === action.payload.data.feedId
+					? action.payload.data
+					: feedItem;
+			});
+			state.mainFeedList = state.mainFeedList.map(feedItem => {
+				return feedItem.feedId === action.payload.data.feedId
+					? action.payload.data
+					: feedItem;
+			});
 		},
-		[__updateFeedItem.rejected]: (state, action) => {
-			console.log("@ __updateFeedItem rejected", action.payload);
-		},
+		[__updateFeedItem.rejected]: (state, action) => {},
 	},
 });
 

@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styled, { css } from "styled-components";
 import Button from "../../../common/Button";
 import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
-import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
 import { __followThunk } from "../../../redux/modules/likeSlice";
 
 function ProfilePageHeader({ memberId }) {
@@ -17,9 +16,6 @@ function ProfilePageHeader({ memberId }) {
 
 	const userInfo = useSelector(state => state.feedSlice.profileFeedList);
 	const { feedsList, followList, followerList, username } = userInfo;
-	// console.log(followerList);
-
-	// const followers = followerList.map(function(follower){return follower.follower})
 
 	return (
 		<Layout variant="profilePageHeaderLayout">
@@ -30,7 +26,7 @@ function ProfilePageHeader({ memberId }) {
 			<Div variant="profileInfoArea">
 				{/* 닉네임, 팔로우 버튼 영역 */}
 				<Div variant="nicknameAndBtns">
-					<span>{memberId}</span>
+					<StDiv variant="memberId">{memberId}</StDiv>
 					<Margin margin="10px 0 0 0">
 						{/* {includes(`${memberId}`)} */}
 						<Button
@@ -44,16 +40,35 @@ function ProfilePageHeader({ memberId }) {
 
 				{/* 게시물, 팔로워, 팔로우 수 영역 */}
 				<Div variant="profileInfoCounterArea">
-					<span>게시물 {feedsList?.length}</span>
-					<span>팔로워 {followerList?.length}</span>
-					<span>팔로우 {followList?.length}</span>
+					<StDiv>게시물 {feedsList?.length}</StDiv>
+					<StDiv>팔로워 {followerList?.length}</StDiv>
+					<StDiv>팔로우 {followList?.length}</StDiv>
 				</Div>
 
 				{/* 유저네임 영역 */}
-				<p>username</p>
+				<StDiv variant="smallBold">username</StDiv>
 			</Div>
 		</Layout>
 	);
 }
 
 export default ProfilePageHeader;
+
+const StDiv = styled.div`
+	font-size: 16px;
+	${({ variant }) => {
+		switch (variant) {
+			case "memberId":
+				return css`
+					font-size: 28px;
+					font-weight: 100;
+				`;
+			case "smallBold":
+				return css`
+					font-weight: 600;
+				`;
+			default:
+				break;
+		}
+	}};
+`;
