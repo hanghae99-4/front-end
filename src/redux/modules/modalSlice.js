@@ -12,12 +12,22 @@ export const modalSlice = createSlice({
 	reducers: {
 		updateIsModalOpen: (state, action) => {
 			state.isModalOpen = !state.isModalOpen;
+			if (state.isModalOpen) {
+				document.body.style.overflow = "hidden";
+			} else {
+				document.body.style.overflow = "unset";
+			}
 		},
 		updateIsEditorModalOpen: (state, action) => {
 			state.isEditorModalOpen = !state.isEditorModalOpen;
 		},
 		updateDetailModalOpen: (state, action) => {
 			state.isDetailModalOpen = !state.isDetailModalOpen;
+			if (state.isDetailModalOpen) {
+				document.body.style.overflow = "hidden";
+			} else {
+				document.body.style.overflow = "unset";
+			}
 		},
 	},
 });

@@ -14,10 +14,12 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
-import { __delFeedItem, getFeedItem } from "../../redux/modules/feedSlice";
+import { __delFeedItem } from "../../redux/modules/feedSlice";
 import { useEffect, useState } from "react";
 import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
 import { __addComment } from "../../redux/modules/commentSlice";
+import { getFeedItem } from "../../redux/modules/feedSlice";
+
 
 const DetailPage = () => {
 	const [change, setChange] = useState(false);
