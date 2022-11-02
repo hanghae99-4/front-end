@@ -62,11 +62,16 @@ function PostingModal() {
 			{/* 이벤트 버블링을 막아줌 */}
 			<div
 				onClick={e => {
-					e.stopPropagation();
+					// e.stopPropagation();
 				}}
 			>
 				{/* 닫기 버튼 */}
-				<Div variant="closeModalBtn">
+				<Div
+					onClick={e => {
+						e.stopPropagation();
+					}}
+					variant="closeModalBtn"
+				>
 					<Image
 						variant="closeModalBtn"
 						onClick={e => {
@@ -78,7 +83,13 @@ function PostingModal() {
 
 				{/* 모달창 */}
 				<Div variant="modalPostion">
-					<Div variant="modalBox">
+					<Div
+						onClick={e => {
+							e.stopPropagation();
+						}}
+						variant="modalBox"
+					>
+						{/* <Div  variant="modalBox"> */}
 						{/* 모달창 헤더 */}
 						<Div variant="modalHeader">
 							<Image variant="goBackIcon" />
