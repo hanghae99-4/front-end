@@ -81,7 +81,10 @@ const DetailPage = () => {
 											</Button>
 											<Button
 												onClick={() => {
-													dispatch(__delFeedItem(feedId));
+													if (window.confirm("삭제하시겠습니까?")) {
+														dispatch(__delFeedItem(feedId));
+														dispatch(updateDetailModalOpen());
+													} else return;
 												}}
 												variant="smallWhite"
 											>

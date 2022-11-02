@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import { getFeedItem } from "../../../redux/modules/feedSlice";
@@ -11,6 +10,7 @@ const ProfileFeedsArea = ({ feedItems }) => {
 		dispatch(getFeedItem(feedItem));
 		dispatch(updateDetailModalOpen(feedItem.feedId));
 	};
+
 	return (
 		<Layout variant="profileFeedsLayout">
 			{feedItems.map(feedItem => (

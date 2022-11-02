@@ -24,6 +24,7 @@ const StLayout = styled.div`
 					flex-direction: column;
 					justify-content: center;
 					margin: 0 auto;
+					background-color: #fafafa;
 				`;
 			case "profilePageHeaderLayout":
 				return css`
@@ -40,6 +41,7 @@ const StLayout = styled.div`
 					display: grid;
 					grid-template-columns: repeat(3, 293px);
 					grid-gap: 28px;
+					background-color: #fafafa;
 				`;
 			case "feedPageLayout":
 				return css`

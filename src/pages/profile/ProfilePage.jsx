@@ -11,10 +11,8 @@ const ProfilePage = () => {
 	const memberId = useParams().userId;
 	useEffect(() => {
 		dispatch(__getProFileFeedList(memberId));
-	}, []);
+	}, [dispatch, memberId]);
 	const feedItems = useSelector(state => state.feedSlice.profileFeedList);
-	const isLoading = useSelector(state => state.feedSlice.isLoading);
-
 	return (
 		<>
 			<Layout variant="mainContentsLayout">

@@ -31,7 +31,7 @@ function EditorModal() {
 
 	useEffect(() => {
 		setInputValue({ contents: contents });
-	}, []);
+	}, [contents]);
 
 	const handleTxtChange = e => {
 		const txt = e.target.value;
@@ -41,19 +41,21 @@ function EditorModal() {
 
 	const handleSubmit = () => {
 		dispatch(__updateFeedItem(editedItem));
+		dispatch(updateIsEditorModalOpen());
+		setInputValue({});
 	};
 
 	if (!isEditorModalOpen) return null;
 
 	return (
-		// 모달 뒷배경을 눌렀을 때 모달이 사라짐(사실 안 사라짐)
+		// 모달 뒷배경을 눌렀을 때 모달이 사라짐
 		<Div
 			variant="editmodalOverlay"
 			onClick={() => {
 				dispatch(updateIsEditorModalOpen());
 			}}
 		>
-			{/* 이벤트 버블링을 막아줌(사실 안 막아줌) */}
+			{/* 이벤트 버블링을 막아줌*/}
 			<div
 				onClick={e => {
 					e.stopPropagation();
@@ -82,18 +84,18 @@ function EditorModal() {
 						</Div>
 
 						{/* 모달창 컨텐츠 영역 */}
-						<Div variant="modalContents">
+						<Div variant="editModalContents">
 							{/* 모달창 왼쪽: 사진 영역 */}
-							<Div variant="uploadImageArea">
+							<Div variant="editImageArea">
 								<img
-									variant="feedImgEdit"
 									alt=""
 									src={feedImage}
 									width="100%"
-									object-fit="contain"
+									height="100%"
+									object-fit="cover"
 									object-position="center"
+									style={{ objectFit: "cover", overflow: "hidden" }}
 								/>
-								{/* <Div variant="sampleInEditor" /> */}
 							</Div>
 
 							{/* 모달창 오른쪽: 게시글 수정 영역 */}
