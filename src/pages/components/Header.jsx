@@ -18,10 +18,6 @@ const Header = () => {
 		window.location.reload();
 	};
 
-	const onUserInfo = () => {
-		dispatch(__getProFileFeedList("dbsqhfk123"));
-	};
-
 	return (
 		<Div variant="headerBox">
 			<Layout variant="headerLayout">
@@ -29,7 +25,7 @@ const Header = () => {
 					<Image variant="navWordMark" />
 				</Margin>
 				<Input variant="searchInput" />
-				<Button variant="smallWhite" onClick={onUserInfo}>
+				<Button variant="smallWhite" onClick={onLogout}>
 					로그아웃
 				</Button>
 				<Nav />

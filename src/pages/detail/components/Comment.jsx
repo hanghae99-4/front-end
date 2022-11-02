@@ -16,13 +16,14 @@ const Comment = ({ comment }) => {
 	const myId = decode.sub;
 
 	const dispatch = useDispatch();
-	const { id, memberId, memberImage, contents, feedId } = comment;
+	console.log(comment);
+	const { id, member, contents, feedId } = comment;
 	return (
 		<Div variant="detailContent">
 			<Image variant="profileDefaultIconMid"></Image>
-			<A>{memberId}</A>
+			<A>{member.memberId}</A>
 			<Text>{contents}</Text>
-			{memberId === myId ? (
+			{member.memberId === myId ? (
 				<DelBtn
 					src={delBtn}
 					alt=""
