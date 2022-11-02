@@ -5,24 +5,24 @@ import Layout from "../../../common/Layout";
 import { getFeedItem } from "../../../redux/modules/feedSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
-const ProfileFeedsArea = ({ feedItem }) => {
-	const {
-		feedId,
-		feedImage,
-		contents,
-		heartByMe,
-		memberId,
-		nickname,
-		heartNum,
-	} = feedItem;
+const ProfileFeedsArea = ({ feedItems }) => {
 	const dispatch = useDispatch();
-	const OpenModal = () => {
+	const OpenModal = feedItem => {
 		dispatch(getFeedItem(feedItem));
-		dispatch(updateDetailModalOpen(feedId));
+		dispatch(updateDetailModalOpen(feedItem.feedId));
 	};
 	return (
 		<Layout variant="profileFeedsLayout">
-			<Image variant="imgSample" feedImage={feedImage} onClick={OpenModal} />
+			{feedItems.map(feedItem => (
+				<Image
+					onClick={() => {
+						OpenModal(feedItem);
+					}}
+					key={feedItem.feedId}
+					feedImage={feedItem.feedImage}
+					variant="imgSample"
+				/>
+			))}
 		</Layout>
 	);
 };
