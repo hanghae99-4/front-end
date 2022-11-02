@@ -39,6 +39,7 @@ const StDiv = styled.div`
 					padding: 0 16px;
 					justify-content: center;
 					border-bottom: 1px solid rgb(219, 219, 219);
+					background-color: white;
 				`;
 
 			// 조인
@@ -75,6 +76,11 @@ const StDiv = styled.div`
 				return css`
 					width: 100%;
 					height: 100%;
+				`;
+			case "editModalContents":
+				return css`
+					width: 100%;
+					height: 380px;
 				`;
 			case "modalBox":
 				return css`
@@ -124,6 +130,14 @@ const StDiv = styled.div`
 					justify-content: center;
 					align-items: center;
 					gap: 30px;
+					border-right: 1px solid #dbdbdb;
+				`;
+			case "editImageArea":
+				return css`
+					height: 100%;
+					width: 100%;
+					justify-content: center;
+					align-items: center;
 					border-right: 1px solid #dbdbdb;
 				`;
 			case "detailImageArea":

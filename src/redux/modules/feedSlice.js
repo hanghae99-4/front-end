@@ -12,7 +12,7 @@ const initialState = {
 	isLoading: false,
 };
 
-// 포스팅
+//! 게시물 업로드
 export const __addFeed = createAsyncThunk(
 	"feed/addFeed",
 	async (payload, thunkAPI) => {
@@ -39,7 +39,7 @@ export const __addFeed = createAsyncThunk(
 	},
 );
 
-//프로필 페이지 리스트
+//! 프로필 페이지 리스트
 export const __getProFileFeedList = createAsyncThunk(
 	"feed/getProFileFeedList",
 	async (payload, thunkAPI) => {
@@ -56,7 +56,7 @@ export const __getProFileFeedList = createAsyncThunk(
 	},
 );
 
-//프로필 유저 정보
+//! 프로필 유저 정보
 export const __getProFile = createAsyncThunk(
 	"feed/getProFile",
 	async (payload, thunkAPI) => {
@@ -75,7 +75,7 @@ export const __getProFile = createAsyncThunk(
 	},
 );
 
-// 메인 페이지
+//! 메인 페이지 피드 리스트
 export const __getMainFeedList = createAsyncThunk(
 	"feed/getMainFeedList",
 	async (payload, thunkAPI) => {
@@ -92,7 +92,7 @@ export const __getMainFeedList = createAsyncThunk(
 	},
 );
 
-// 게시물 삭제
+//! 게시물 삭제
 export const __delFeedItem = createAsyncThunk(
 	"feed/delFeedItem",
 	async (payload, thunkAPI) => {
@@ -109,24 +109,24 @@ export const __delFeedItem = createAsyncThunk(
 	},
 );
 
-// 게시물 수정
+//! 게시물 수정
 export const __updateFeedItem = createAsyncThunk(
 	"feed/updateFeedItem",
 	async (payload, thunkAPI) => {
-		console.log("@ 수정 payload =>", payload);
-		const editedItem = { contents: payload.contents };
-		console.log("다시만든거", editedItem);
+		const frm = new FormData();
+		frm.append("contents", payload.contents);
 		try {
 			const response = await axios.put(
 				`${BASE_URL}/feeds/${payload.feedId}`,
-				editedItem,
+				frm,
 				{
 					headers: {
 						Authorization: token,
 					},
 				},
 			);
-			return thunkAPI.fulfillWithValue(response.data);
+			return thunkAPI.fulfillWithValue(payload);
+			// return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
@@ -195,7 +195,16 @@ export const feedSlice = createSlice({
 
 		//! 게시물 수정
 		[__updateFeedItem.fulfilled]: (state, action) => {
-			console.log("@ __updateFeedItem fullfilled", action.payload);
+			const editedItem = action.payload.contents;
+			state.feedItem = { ...state.feedItem, contents: editedItem };
+			state.profileFeedList.map(feedItem => {
+				if (feedItem.feedId === action.payload.feedId) {
+					feedItem = editedItem;
+				}
+				return feedItem;
+			});
+			// console.log("@ __updateFeedItem fullfilled", action.payload);
+			// console.log("@ state변경", state.profileFeedList);
 		},
 		[__updateFeedItem.rejected]: (state, action) => {
 			console.log("@ __updateFeedItem rejected", action.payload);

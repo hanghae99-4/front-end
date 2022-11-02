@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { SigninPage, DetailPage } from "..";
 import PostingModal from "../components/modal/PostingModal";
