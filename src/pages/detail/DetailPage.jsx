@@ -18,8 +18,7 @@ import { __delFeedItem } from "../../redux/modules/feedSlice";
 import { useEffect, useState } from "react";
 import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
 import { __addComment } from "../../redux/modules/commentSlice";
-import { getFeedItem, __delFeedItem } from "../../redux/modules/feedSlice";
-
+import { getFeedItem } from "../../redux/modules/feedSlice";
 
 const DetailPage = () => {
 	const [change, setChange] = useState(false);
