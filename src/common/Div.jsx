@@ -102,6 +102,14 @@ const StDiv = styled.div`
 					height: 100vh;
 					z-index: 20;
 				`;
+			case "editmodalOverlay":
+				return css`
+					background-color: rgba(0, 0, 0, 0.6);
+					position: fixed;
+					width: 100vw;
+					height: 100vh;
+					z-index: 21;
+				`;
 			case "closeModalBtn":
 				return css`
 					position: fixed;
@@ -149,9 +157,6 @@ const StDiv = styled.div`
 			case "modalContainer":
 				return css`
 					position: absolute;
-					/* width: 80vw;
-					max-width: 1200px; */
-					/* height: 80vh; */
 					width: 850px;
 					height: 550px;
 					justify-content: center;
@@ -253,9 +258,6 @@ const StDiv = styled.div`
 				return css`
 					width: 100%;
 					height: 100%;
-					/* background-image: url(https://instakilogram.s3.ap-northeast-2.amazonaws.com/feeds/14e3fe74-0e51-45b6-8f5c-2d4400d09305jinseok); */
-					/* background-image: url(https://m.yooamarket.com/web/product/big/201512/643_shop1_231431.jpg); */
-					/* background-image: url(feedImage); */
 					background-size: cover;
 				`;
 

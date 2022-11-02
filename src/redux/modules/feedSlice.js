@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { updateDetailModalOpen } from "./modalSlice";
 const BASE_URL = process.env.REACT_APP_SERVER;
 const token = localStorage.getItem("token");
 
@@ -110,6 +108,28 @@ export const __delFeedItem = createAsyncThunk(
 	},
 );
 
+// 게시물 수정
+export const __updateFeedItem = createAsyncThunk(
+	"feed/updateFeedItem",
+	async (payload, thunkAPI) => {
+		// console.log("@ payload =>", payload);
+		try {
+			const response = await axios.put(
+				`${BASE_URL}/feeds/${payload.feedId}`,
+				payload.contents,
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			);
+			return thunkAPI.fulfillWithValue(response.data);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	},
+);
+
 // 슬라이스
 export const feedSlice = createSlice({
 	name: "feed",
@@ -160,7 +180,7 @@ export const feedSlice = createSlice({
 			// hook은 여기서 못 부름
 			// const dispatch = useDispatch();
 			// dispatch(updateDetailModalOpen());
-			state.isLoading = true;
+			state.isLoading = !state.isLoading;
 		},
 		[__delFeedItem.rejected]: (state, action) => {
 			// console.log("@ __delFeedItem rejected", action.payload);

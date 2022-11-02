@@ -13,6 +13,7 @@ const ProfilePage = () => {
 		dispatch(__getProFileFeedList(memberId));
 	}, []);
 	const feedItems = useSelector(state => state.feedSlice.profileFeedList);
+	const isLoading = useSelector(state => state.feedSlice.isLoading);
 
 	return (
 		<>
@@ -20,12 +21,7 @@ const ProfilePage = () => {
 				{/* 프로필 페이지 헤더 */}
 				<ProfilePageHeader memberId={memberId}></ProfilePageHeader>
 				{/* 프로필 페이지 피드 */}
-				{feedItems.map(feedItem => (
-					<ProfileFeedsArea
-						key={feedItem.feedId}
-						feedItem={feedItem}
-					></ProfileFeedsArea>
-				))}
+				<ProfileFeedsArea feedItems={feedItems} />
 			</Layout>
 		</>
 	);

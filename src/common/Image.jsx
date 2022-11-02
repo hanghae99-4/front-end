@@ -73,7 +73,16 @@ const Image = ({ variant, onClick, feedImage }) => {
 		case "goBackIcon":
 			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
 		case "imgSample":
-			return <img onClick={onClick} src={feedImage} alt="" />;
+			return (
+				<img
+					onClick={onClick}
+					src={feedImage}
+					style={{ objectFit: "cover" }}
+					width="100%"
+					height="100%"
+					alt=""
+				/>
+			);
 
 		case "heartIcon":
 			return (
