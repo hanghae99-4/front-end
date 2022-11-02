@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import Button from "../../../common/Button";
 import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
+import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
 import { __followThunk } from "../../../redux/modules/likeSlice";
 
 function ProfilePageHeader({ memberId }) {
