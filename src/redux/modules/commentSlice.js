@@ -12,12 +12,11 @@ const initialState = {
 export const __addComment = createAsyncThunk(
 	"feed/addComment",
 	async (payload, thunkAPI) => {
-		console.log(payload);
 		const { feedId, comments } = payload;
 		try {
 			const response = await axios.post(
-				`${BASE_URL}`,
-				{ feedId: feedId, comments: comments },
+				`${BASE_URL}/${feedId}/comments`,
+				{ feedId: feedId, contents: comments },
 				{
 					headers: {
 						Authorization: token,
@@ -36,16 +35,12 @@ export const __delComment = createAsyncThunk(
 	"feed/delComment",
 	async (payload, thunkAPI) => {
 		console.log(payload);
-		const { feedId, commentId } = payload;
 		try {
-			const response = await axios.post(
-				`${BASE_URL}/feed/${feedId}/commnets/${commentId}`,
-				{
-					headers: {
-						Authorization: token,
-					},
+			const response = await axios.delete(`${BASE_URL}/comments/${payload}`, {
+				headers: {
+					Authorization: token,
 				},
-			);
+			});
 			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
@@ -71,9 +66,7 @@ export const commentSlice = createSlice({
 		[__delComment.fulfilled]: (state, action) => {
 			console.log("sucsess");
 		},
-		[__delComment.rejected]: (state, action) => {
-			console.log(action.payload);
-		},
+		[__delComment.rejected]: (state, action) => {},
 	},
 });
 

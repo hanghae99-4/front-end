@@ -33,6 +33,7 @@ export const __addFeed = createAsyncThunk(
 					"Content-Type": "multipart/form-data",
 				},
 			});
+			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -44,12 +45,14 @@ export const __addFeed = createAsyncThunk(
 export const __getProFileFeedList = createAsyncThunk(
 	"feed/getProFileFeedList",
 	async (payload, thunkAPI) => {
+		console.log(payload);
 		try {
 			const response = await axios.get(`${BASE_URL}/${payload}`, {
 				headers: {
 					Authorization: token,
 				},
 			});
+			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -143,6 +146,13 @@ export const feedSlice = createSlice({
 		getFeedItem: (state, action) => {
 			state.feedItem = action.payload;
 		},
+		changeFeedItemLike: (state, action) => {
+			state.feedItem = {
+				...state.feedItem,
+				heartByMe: action.payload.heartByMe,
+				heartNum: action.payload.heartNum,
+			};
+		},
 	},
 	extraReducers: {
 		//! 게시물 업로드
@@ -213,5 +223,5 @@ export const feedSlice = createSlice({
 	},
 });
 
-export const { getFeedItem } = feedSlice.actions;
+export const { getFeedItem, changeFeedItemLike } = feedSlice.actions;
 export default feedSlice.reducer;

@@ -10,7 +10,7 @@ import { getFeedItem } from "../../../redux/modules/feedSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { __addComment } from "../../../redux/modules/commentSlice";
-import { compose } from "@reduxjs/toolkit";
+import { __changeThunk } from "../../../redux/modules/likeSlice";
 
 const FeedContent = ({
 	feedItem,
@@ -35,7 +35,7 @@ const FeedContent = ({
 	const addCommentHandler = () => {
 		const commentInfo = { feedId: feedId, comments: comment };
 		dispatch(__addComment(commentInfo));
-		setComment("");
+		dispatch(__changeThunk());
 	};
 
 	return (
@@ -66,7 +66,14 @@ const FeedContent = ({
 					onChange={commentChange}
 					placeholder="댓글 달기..."
 				/>
-				<Button variant="smallWhite-position" onClick={addCommentHandler}>
+				<Button
+					variant="smallWhite-position"
+					onClick={() => {
+						addCommentHandler();
+						setComment("");
+						dispatch();
+					}}
+				>
 					게시
 				</Button>
 			</Div>
