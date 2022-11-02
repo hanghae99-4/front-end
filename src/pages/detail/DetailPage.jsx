@@ -20,6 +20,7 @@ import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
 import { __addComment } from "../../redux/modules/commentSlice";
 import { getFeedItem } from "../../redux/modules/feedSlice";
 
+
 const DetailPage = () => {
 	const [change, setChange] = useState(false);
 
