@@ -10,10 +10,11 @@ const ProfileFeedsArea = ({ feedItems }) => {
 		dispatch(getFeedItem(feedItem));
 		dispatch(updateDetailModalOpen(feedItem.feedId));
 	};
+	const feedsList = feedItems.feedsList;
 
 	return (
 		<Layout variant="profileFeedsLayout">
-			{feedItems.map(feedItem => (
+			{feedsList?.map(feedItem => (
 				<Image
 					onClick={() => {
 						OpenModal(feedItem);
