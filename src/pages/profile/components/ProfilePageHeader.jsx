@@ -1,22 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styled, { css } from "styled-components";
 import Button from "../../../common/Button";
 import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
-import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
 import { __followThunk } from "../../../redux/modules/likeSlice";
 
 function ProfilePageHeader({ memberId }) {
 	const dispatch = useDispatch();
-	// const userinfo = useSelector(state =>
-	// 	console.log(state.feedSlice.profileFeedList),
-	// );
-
-	// useEffect(() => {
-	// 	dispatch(__getProFileFeedList(memberId));
-	// });
 
 	return (
 		<Layout variant="profilePageHeaderLayout">
@@ -27,7 +19,7 @@ function ProfilePageHeader({ memberId }) {
 			<Div variant="profileInfoArea">
 				{/* 닉네임, 팔로우 버튼 영역 */}
 				<Div variant="nicknameAndBtns">
-					<span>{memberId}</span>
+					<StDiv variant="memberId">{memberId}</StDiv>
 					<Margin margin="10px 0 0 0">
 						<Button
 							variant="smallBlue"
@@ -40,16 +32,35 @@ function ProfilePageHeader({ memberId }) {
 
 				{/* 게시물, 팔로워, 팔로우 수 영역 */}
 				<Div variant="profileInfoCounterArea">
-					<span>게시물 5</span>
-					<span>팔로워 5</span>
-					<span>팔로우 5</span>
+					<StDiv>게시물 5</StDiv>
+					<StDiv>팔로워 5</StDiv>
+					<StDiv>팔로우 5</StDiv>
 				</Div>
 
 				{/* 유저네임 영역 */}
-				<p>username</p>
+				<StDiv variant="smallBold">username</StDiv>
 			</Div>
 		</Layout>
 	);
 }
 
 export default ProfilePageHeader;
+
+const StDiv = styled.div`
+	font-size: 16px;
+	${({ variant }) => {
+		switch (variant) {
+			case "memberId":
+				return css`
+					font-size: 28px;
+					font-weight: 100;
+				`;
+			case "smallBold":
+				return css`
+					font-weight: 600;
+				`;
+			default:
+				break;
+		}
+	}};
+`;

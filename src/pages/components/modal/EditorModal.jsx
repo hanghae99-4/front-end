@@ -76,7 +76,12 @@ function EditorModal() {
 					<Div variant="modalBox">
 						{/* 모달창 헤더 */}
 						<Div variant="modalHeader">
-							<Button variant="smallBlack">취소</Button>
+							<Button
+								onClick={() => dispatch(updateIsEditorModalOpen())}
+								variant="smallBlack"
+							>
+								취소
+							</Button>
 							<p>정보 수정</p>
 							<Button onClick={handleSubmit} variant="smallWhite">
 								완료

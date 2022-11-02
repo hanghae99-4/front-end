@@ -1,20 +1,31 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
-import { getFeedItem } from "../../../redux/modules/feedSlice";
+import {
+	getFeedItem,
+	__getProFileFeedList,
+} from "../../../redux/modules/feedSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
-const ProfileFeedsArea = ({ feedItems }) => {
+const ProfileFeedsArea = () => {
+	const profileFeedList = useSelector(state => state.feedSlice.profileFeedList);
+	const memberId = useParams();
 	const dispatch = useDispatch();
+
 	const OpenModal = feedItem => {
 		dispatch(getFeedItem(feedItem));
 		dispatch(updateDetailModalOpen(feedItem.feedId));
 	};
-	const feedsList = feedItems.feedsList;
+
+	useEffect(() => {
+		dispatch(__getProFileFeedList(memberId.userId));
+	}, [dispatch, memberId]);
 
 	return (
 		<Layout variant="profileFeedsLayout">
-			{feedsList?.map(feedItem => (
+			{profileFeedList?.map(feedItem => (
 				<Image
 					onClick={() => {
 						OpenModal(feedItem);
