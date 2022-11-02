@@ -197,12 +197,13 @@ export const feedSlice = createSlice({
 		[__updateFeedItem.fulfilled]: (state, action) => {
 			const editedItem = action.payload.contents;
 			state.feedItem = { ...state.feedItem, contents: editedItem };
-			state.profileFeedList.map(feedItem => {
-				if (feedItem.feedId === action.payload.feedId) {
-					feedItem = editedItem;
-				}
-				return feedItem;
-			});
+			console.log("state", state.proFileFeedList);
+			// state.profileFeedList.map(feedItem => {
+			// 	if (feedItem.feedId === action.payload.feedId) {
+			// 		feedItem = editedItem;
+			// 	}
+			// 	return feedItem;
+			// });
 			// console.log("@ __updateFeedItem fullfilled", action.payload);
 			// console.log("@ state변경", state.profileFeedList);
 		},
