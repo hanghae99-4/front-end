@@ -10,13 +10,16 @@ import { __followThunk } from "../../../redux/modules/likeSlice";
 
 function ProfilePageHeader({ memberId }) {
 	const dispatch = useDispatch();
-	// const userinfo = useSelector(state =>
-	// 	console.log(state.feedSlice.profileFeedList),
-	// );
 
-	// useEffect(() => {
-	// 	dispatch(__getProFileFeedList(memberId));
-	// });
+	useEffect(() => {
+		dispatch(__getProFileFeedList(memberId));
+	}, [dispatch]);
+
+	const userInfo = useSelector(state => state.feedSlice.profileFeedList);
+	const { feedsList, followList, followerList, username } = userInfo;
+	// console.log(followerList);
+
+	// const followers = followerList.map(function(follower){return follower.follower})
 
 	return (
 		<Layout variant="profilePageHeaderLayout">
@@ -29,6 +32,7 @@ function ProfilePageHeader({ memberId }) {
 				<Div variant="nicknameAndBtns">
 					<span>{memberId}</span>
 					<Margin margin="10px 0 0 0">
+						{/* {includes(`${memberId}`)} */}
 						<Button
 							variant="smallBlue"
 							onClick={() => dispatch(__followThunk(memberId))}
@@ -40,9 +44,9 @@ function ProfilePageHeader({ memberId }) {
 
 				{/* 게시물, 팔로워, 팔로우 수 영역 */}
 				<Div variant="profileInfoCounterArea">
-					<span>게시물 5</span>
-					<span>팔로워 5</span>
-					<span>팔로우 5</span>
+					<span>게시물 {feedsList?.length}</span>
+					<span>팔로워 {followerList?.length}</span>
+					<span>팔로우 {followList?.length}</span>
 				</Div>
 
 				{/* 유저네임 영역 */}

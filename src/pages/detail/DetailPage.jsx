@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateDetailModalOpen } from "../../redux/modules/modalSlice";
+import {
+	updateDetailModalOpen,
+	updateIsEditorModalOpen,
+} from "../../redux/modules/modalSlice";
 import Button from "../../common/Button";
 import Div from "../../common/Div";
 import Image from "../../common/Image";
@@ -11,7 +14,7 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
-import { __delFeedItem } from "../../redux/modules/feedSlice";
+import { __delFeedItem, getFeedItem } from "../../redux/modules/feedSlice";
 import { useEffect, useState } from "react";
 import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
 import { __addComment } from "../../redux/modules/commentSlice";
@@ -87,10 +90,21 @@ const DetailPage = () => {
 									<A variant="noMargin">{memberId}</A>
 									{myId === Author ? (
 										<BtnBox>
-											<Button variant="smallWhite">수정</Button>
 											<Button
 												onClick={() => {
-													dispatch(__delFeedItem(feedId));
+													dispatch(getFeedItem(feedItem));
+													dispatch(updateIsEditorModalOpen());
+												}}
+												variant="smallWhite"
+											>
+												수정
+											</Button>
+											<Button
+												onClick={() => {
+													if (window.confirm("삭제하시겠습니까?")) {
+														dispatch(__delFeedItem(feedId));
+														dispatch(updateDetailModalOpen());
+													} else return;
 												}}
 												variant="smallWhite"
 											>
