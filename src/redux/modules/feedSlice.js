@@ -10,6 +10,7 @@ const initialState = {
 	profileFeedList: [],
 	profile: [],
 	isLoading: false,
+	isUpdate: false,
 };
 
 //! 게시물 업로드
@@ -151,7 +152,6 @@ export const feedSlice = createSlice({
 		[__addFeed.fulfilled]: (state, action) => {
 			// console.log("@ __addFeed fullfilled", action.payload);
 			alert("게시물이 공유되었습니다.");
-			state.feedItem = action.payload;
 			// console.log("@ __addFeed state change", state.feedItem);
 		},
 		[__addFeed.rejected]: (state, action) => {
