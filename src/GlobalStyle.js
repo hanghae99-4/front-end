@@ -46,6 +46,9 @@ const GlobalStyle = createGlobalStyle`
         
     }
 
+    body{
+      background-color: #FAFAFA;
+    }
 `;
 
 export default GlobalStyle;

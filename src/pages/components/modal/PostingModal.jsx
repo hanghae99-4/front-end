@@ -46,6 +46,7 @@ function PostingModal() {
 	// 업로드
 	const handleUpload = () => {
 		dispatch(__addFeed(post));
+		dispatch(updateIsModalOpen());
 	};
 
 	if (!isModalOpen) return null;

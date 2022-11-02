@@ -73,7 +73,16 @@ const Image = ({ variant, onClick, feedImage }) => {
 		case "goBackIcon":
 			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
 		case "imgSample":
-			return <img onClick={onClick} src={feedImage} alt="" />;
+			return (
+				<img
+					onClick={onClick}
+					src={feedImage}
+					style={{ objectFit: "cover", overflow: "hidden" }}
+					width="100%"
+					height="293px"
+					alt=""
+				/>
+			);
 
 		case "heartIcon":
 			return (
@@ -118,17 +127,11 @@ const Image = ({ variant, onClick, feedImage }) => {
 			return (
 				<img
 					src={feedImage}
-					// position="absolute"
 					sizes="800px"
-					// sizes="472px"
 					alt=""
 					width="100%"
-					// height="100%"
 					object-fit="contain"
-					// transform="translate(-50%, -50%)"
 					object-position="center"
-					// background-position="center"
-					// style={{ cursor: "pointer" }}
 				/>
 			);
 		default:
