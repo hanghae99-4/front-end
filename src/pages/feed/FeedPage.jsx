@@ -11,7 +11,6 @@ function FeedPage() {
 	const isLoading = useSelector(state => state.feedSlice.isLoading);
 	const isLikeChanged = useSelector(state => state.like.isChanged);
 
-
 	useEffect(() => {
 		dispatch(__getMainFeedList());
 	}, [dispatch, isLikeChanged]);

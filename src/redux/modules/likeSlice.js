@@ -10,7 +10,7 @@ const refreshToken = localStorage.getItem("refresh-token");
 
 // InitialState
 const initialState = {
-	Post: [],
+	feed: [],
 	isChanged: false,
 };
 
@@ -18,16 +18,16 @@ const initialState = {
 export const __getFeed = createAsyncThunk(
 	"feed/getFeed",
 	async (feedId, thunkAPI) => {
-		const response = await axios.get(`${BASE_URL}/feeds`, {
+		console.log(feedId);
+		const response = await axios.get(`${BASE_URL}/feeds/${feedId}`, {
 			headers: {
 				Authorization: token,
 				"Refresh-Token": refreshToken,
 				"Content-Type": "application/json",
 			},
 		});
-		console.log(response);
 		if (response.data.success === true) {
-			return response.data.data;
+			return thunkAPI.fulfillWithValue(response.data.data);
 		} else {
 			return null;
 		}
@@ -85,7 +85,7 @@ export const likeSlice = createSlice({
 	reducers: {},
 	extraReducers: {
 		[__getFeed.fulfilled]: (state, action) => {
-			state.post = action.payload;
+			state.feed = action.payload;
 		},
 		[__likeThunk.fulfilled]: (state, action) => {
 			console.log(action.payload);

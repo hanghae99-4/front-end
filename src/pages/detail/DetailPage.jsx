@@ -12,17 +12,23 @@ import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
 import { __delFeedItem } from "../../redux/modules/feedSlice";
+import { useEffect, useState } from "react";
+import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
+import { __addComment } from "../../redux/modules/commentSlice";
 
 const DetailPage = () => {
+	const [change, setChange] = useState(false);
+
 	//토큰 디코드
 	const token = localStorage.getItem("token").replace("Bearer ", "");
 	let decode = jwt_decode(token);
 	const myId = decode.sub;
 
+	const dispatch = useDispatch();
+	//useSelector
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
-	const isLoading = useSelector(state => state.feedSlice.isLoading);
-
+	const isLikeChanged = useSelector(state => state.like.isChanged);
 	const {
 		feedId,
 		feedImage,
@@ -34,12 +40,26 @@ const DetailPage = () => {
 		username,
 		commentsList,
 	} = feedItem;
-	const dispatch = useDispatch();
+
+	//작성자 확인
+	const Author = `${memberId}`;
+
 	const CloseModal = () => {
 		dispatch(updateDetailModalOpen());
 	};
 
-	const Author = `${memberId}`;
+	// Add Comment
+	const [comment, setComment] = useState("");
+
+	const commentChange = e => {
+		setComment(e.target.value);
+	};
+	const addCommentHandler = async () => {
+		const commentInfo = { feedId: feedId, comments: comment };
+		await dispatch(__addComment(commentInfo));
+		await dispatch(__changeThunk());
+		setComment("");
+	};
 
 	if (!isDetailOpen) return null;
 
@@ -97,14 +117,26 @@ const DetailPage = () => {
 							<Div variant="writeComment">
 								<LikeBox>
 									<FeedIcon
+										change={change}
+										setChange={setChange}
 										heartByMe={heartByMe}
 										heartNum={heartNum}
 										feedId={feedId}
 									/>
 								</LikeBox>
 								<Div variant="detailCommentArea">
-									<TextArea variant="commentWrite" placeholder="댓글 달기..." />
-									<Button variant="smallWhite-position">게시</Button>
+									<TextArea
+										variant="commentWrite"
+										value={comment}
+										onChange={commentChange}
+										placeholder="댓글 달기..."
+									/>
+									<Button
+										variant="smallWhite-position"
+										onClick={addCommentHandler}
+									>
+										게시
+									</Button>
 								</Div>
 							</Div>
 						</Div>
