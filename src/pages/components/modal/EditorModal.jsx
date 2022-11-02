@@ -39,8 +39,6 @@ function EditorModal() {
 		setEditedItem({ feedId: feedId, contents: inputValue.contents });
 	};
 
-	console.log("@ 보낼거 =>", editedItem);
-
 	const handleSubmit = () => {
 		dispatch(__updateFeedItem(editedItem));
 	};

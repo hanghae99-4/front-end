@@ -55,6 +55,7 @@ export const __getProFileFeedList = createAsyncThunk(
 		}
 	},
 );
+
 //프로필 유저 정보
 export const __getProFile = createAsyncThunk(
 	"feed/getProFile",
@@ -112,11 +113,13 @@ export const __delFeedItem = createAsyncThunk(
 export const __updateFeedItem = createAsyncThunk(
 	"feed/updateFeedItem",
 	async (payload, thunkAPI) => {
-		// console.log("@ payload =>", payload);
+		console.log("@ 수정 payload =>", payload);
+		const editedItem = { contents: payload.contents };
+		console.log("다시만든거", editedItem);
 		try {
 			const response = await axios.put(
 				`${BASE_URL}/feeds/${payload.feedId}`,
-				payload.contents,
+				editedItem,
 				{
 					headers: {
 						Authorization: token,
