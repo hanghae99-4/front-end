@@ -12,12 +12,26 @@ export const modalSlice = createSlice({
 	reducers: {
 		updateIsModalOpen: (state, action) => {
 			state.isModalOpen = !state.isModalOpen;
+			if (state.isModalOpen) {
+				console.log("열렸다");
+				document.body.style.overflow = "hidden";
+			} else {
+				console.log("닫혔다");
+				document.body.style.overflow = "unset";
+			}
 		},
 		updateIsEditorModalOpen: (state, action) => {
 			state.isEditorModalOpen = !state.isEditorModalOpen;
 		},
 		updateDetailModalOpen: (state, action) => {
 			state.isDetailModalOpen = !state.isDetailModalOpen;
+			if (state.isDetailModalOpen) {
+				console.log("열렸다");
+				document.body.style.overflow = "hidden";
+			} else {
+				console.log("닫혔다");
+				document.body.style.overflow = "unset";
+			}
 		},
 	},
 });
