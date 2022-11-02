@@ -77,9 +77,9 @@ const Image = ({ variant, onClick, feedImage }) => {
 				<img
 					onClick={onClick}
 					src={feedImage}
-					style={{ objectFit: "cover" }}
+					style={{ objectFit: "cover", overflow: "hidden" }}
 					width="100%"
-					height="100%"
+					height="293px"
 					alt=""
 				/>
 			);
@@ -127,17 +127,11 @@ const Image = ({ variant, onClick, feedImage }) => {
 			return (
 				<img
 					src={feedImage}
-					// position="absolute"
 					sizes="800px"
-					// sizes="472px"
 					alt=""
 					width="100%"
-					// height="100%"
 					object-fit="contain"
-					// transform="translate(-50%, -50%)"
 					object-position="center"
-					// background-position="center"
-					// style={{ cursor: "pointer" }}
 				/>
 			);
 		default:
