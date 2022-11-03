@@ -2,13 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../common/Layout";
 import { __getMainFeedList } from "../../redux/modules/feedSlice";
-import { __changeThunk } from "../../redux/modules/likeSlice";
 import Feed from "./components/Feed";
 
 function FeedPage() {
 	const dispatch = useDispatch();
 	const mainFeedList = useSelector(state => state.feedSlice.mainFeedList);
-	const isLoading = useSelector(state => state.feedSlice.isLoading);
 	const isLikeChanged = useSelector(state => state.like.isChanged);
 
 	useEffect(() => {

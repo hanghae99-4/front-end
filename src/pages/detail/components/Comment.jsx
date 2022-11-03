@@ -4,10 +4,11 @@ import A from "../../../common/A";
 import Text from "../../../common/Text";
 import delBtn from "../../../static/images/delete.png";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __delComment } from "../../../redux/modules/commentSlice";
 import jwt_decode from "jwt-decode";
 import { __changeThunk } from "../../../redux/modules/likeSlice";
+import { delFeedComment } from "../../../redux/modules/feedSlice";
 
 const Comment = ({ comment }) => {
 	//토큰 디코드
@@ -16,8 +17,13 @@ const Comment = ({ comment }) => {
 	const myId = decode.sub;
 
 	const dispatch = useDispatch();
-	console.log(comment);
+
 	const { id, member, contents, feedId } = comment;
+	console.log(comment);
+
+	const delRdComment = () => {
+		dispatch(delFeedComment(id));
+	};
 	return (
 		<Div variant="detailContent">
 			<Image variant="profileDefaultIconMid"></Image>
@@ -29,6 +35,7 @@ const Comment = ({ comment }) => {
 					alt=""
 					onClick={() => {
 						dispatch(__delComment(id));
+						delRdComment();
 						dispatch(__changeThunk());
 					}}
 				/>

@@ -17,9 +17,7 @@ function ProfilePageHeader({ memberId }) {
 
 	const userInfo = useSelector(state => state.feedSlice.profileFeedList);
 	const { feedsList, followList, followerList, username } = userInfo;
-	// console.log(followerList);
-
-	// const followers = followerList.map(function(follower){return follower.follower})
+	console.log(followerList);
 
 	return (
 		<Layout variant="profilePageHeaderLayout">
@@ -50,7 +48,7 @@ function ProfilePageHeader({ memberId }) {
 				</Div>
 
 				{/* 유저네임 영역 */}
-				<p>username</p>
+				<p>{username}</p>
 			</Div>
 		</Layout>
 	);

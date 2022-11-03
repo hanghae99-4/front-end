@@ -8,7 +8,7 @@ import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 import { useDispatch } from "react-redux";
 import { getFeedItem } from "../../../redux/modules/feedSlice";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { __addComment } from "../../../redux/modules/commentSlice";
 import { __changeThunk } from "../../../redux/modules/likeSlice";
 
@@ -26,8 +26,13 @@ const FeedContent = ({
 		dispatch(updateDetailModalOpen());
 	};
 
+	useEffect(() => {
+		dispatch(__changeThunk());
+	}, [dispatch]);
+
 	// Add Comment
 	const [comment, setComment] = useState("");
+	const [isChanged, setIsChanged] = useState(false);
 
 	const commentChange = e => {
 		setComment(e.target.value);
@@ -36,17 +41,21 @@ const FeedContent = ({
 		const commentInfo = { feedId: feedId, comments: comment };
 		dispatch(__addComment(commentInfo));
 		dispatch(__changeThunk());
+		setIsChanged(true);
 	};
 
 	return (
 		<>
+			{isChanged && <div></div>}
 			<Div variant="contentArea">
-				<NicknameWrap>
-					<A variant="noMargin" onClick={() => navigate(`/${memberId}`)}>
-						{memberId}
-					</A>
-				</NicknameWrap>
-				<Text>{contents}</Text>
+				<Wrap>
+					<NicknameWrap>
+						<A variant="noMargin" onClick={() => navigate(`/${memberId}`)}>
+							{memberId}
+						</A>
+						<Text>{contents}</Text>
+					</NicknameWrap>
+				</Wrap>
 				{commentsList.length === 0 ? null : (
 					<A
 						variant="comment"
@@ -71,7 +80,7 @@ const FeedContent = ({
 					onClick={() => {
 						addCommentHandler();
 						setComment("");
-						dispatch();
+						dispatch(__changeThunk());
 					}}
 				>
 					게시
@@ -83,9 +92,18 @@ const FeedContent = ({
 
 export default FeedContent;
 
+const Wrap = styled.div`
+	margin-top: 5px;
+	width: 468px;
+	min-height: 14px;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+`;
+
 const NicknameWrap = styled.div`
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	width: auto;
-	height: 34px;
 `;

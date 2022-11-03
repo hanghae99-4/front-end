@@ -153,6 +153,16 @@ export const feedSlice = createSlice({
 				heartNum: action.payload.heartNum,
 			};
 		},
+		addFeedComment: (state, action) => {
+			state.feedItem.commentsList = state.feedItem.commentsList.push(
+				action.payload,
+			);
+		},
+		delFeedComment: (state, action) => {
+			state.feedItem.commentsList = state.feedItem.commentsList.filter(
+				comment => comment.id !== action.payload,
+			);
+		},
 	},
 	extraReducers: {
 		//! 게시물 업로드
@@ -223,5 +233,10 @@ export const feedSlice = createSlice({
 	},
 });
 
-export const { getFeedItem, changeFeedItemLike } = feedSlice.actions;
+export const {
+	getFeedItem,
+	changeFeedItemLike,
+	addFeedComment,
+	delFeedComment,
+} = feedSlice.actions;
 export default feedSlice.reducer;

@@ -8,9 +8,9 @@ import ProfilePageHeader from "./components/ProfilePageHeader";
 
 const ProfilePage = () => {
 	const dispatch = useDispatch();
-	const memberId = useParams().userId;
+	const memberId = useParams()?.userId;
 	useEffect(() => {
-		dispatch(__getProFileFeedList(memberId));
+		if (memberId) dispatch(__getProFileFeedList(memberId));
 	}, [dispatch, memberId]);
 	const feedItems = useSelector(state => state.feedSlice.profileFeedList);
 	return (

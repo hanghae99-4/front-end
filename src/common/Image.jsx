@@ -59,7 +59,7 @@ const Image = ({ variant, onClick, feedImage }) => {
 					position="fixed"
 					width="18"
 					height="18"
-					top="8px"
+					top="15px"
 					right="8px"
 					alt=""
 				/>
@@ -115,12 +115,13 @@ const Image = ({ variant, onClick, feedImage }) => {
 					position="absolute"
 					sizes="472px"
 					alt=""
-					width="472px"
+					width="468px"
 					object-fit="cover"
 					transform="translate(-50%, -50%)"
 					object-position="center"
 					background-position="center"
 					style={{ cursor: "pointer" }}
+					box-sizing="border-box"
 				/>
 			);
 		case "feedImgDeital":

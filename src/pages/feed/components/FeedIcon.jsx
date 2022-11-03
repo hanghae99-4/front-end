@@ -14,23 +14,26 @@ import {
 } from "../../../redux/modules/likeSlice";
 import { updateDetailModalOpen } from "../../../redux/modules/modalSlice";
 
-const FeedIcon = ({
-	feedItem,
-	feedId,
-	memberId,
-	heartByMe,
-	heartNum,
-	change,
-	setChange,
-}) => {
+const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 	const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(heartByMe);
+	const [heartCount, setHeartCount] = useState(heartNum);
 
 	const onClickLike = () => {
 		console.log("LikeBtn");
 		dispatch(__likeThunk(`${feedId}`));
-		dispatch(__changeThunk());
+		dispatch(changeFeedItemLike({ heartByMe: !isLike, heartNum: heartCount }));
 		setIsLike(!isLike);
+		dispatch(__changeThunk());
+		console.log(heartCount);
+	};
+
+	const heartCounting = () => {
+		if (isLike) {
+			setHeartCount(heartCount - 1);
+		} else {
+			setHeartCount(heartCount + 1);
+		}
 	};
 
 	const OpenModal = () => {
@@ -42,9 +45,12 @@ const FeedIcon = ({
 		<>
 			<Div variant="iconArea">
 				<Svg
-					variant={heartByMe ? "cancelLike" : "like"}
+					variant={isLike ? "cancelLike" : "like"}
 					heartByMe={heartByMe}
-					onClick={onClickLike}
+					onClick={() => {
+						heartCounting();
+						onClickLike();
+					}}
 				/>
 				<Svg
 					variant="comment"
