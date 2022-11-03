@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../common/Layout";
-import { __getMainFeedList } from "../../redux/modules/feedSlice";
+import { __getMainFeedList, __test } from "../../redux/modules/feedSlice";
 import Feed from "./components/Feed";
 
 function FeedPage() {
@@ -12,6 +12,10 @@ function FeedPage() {
 	useEffect(() => {
 		dispatch(__getMainFeedList());
 	}, [dispatch, isLikeChanged]);
+
+	// useEffect(() => {
+	// 	dispatch(__test());
+	// }, [dispatch]);
 
 	return (
 		<>

@@ -19,7 +19,6 @@ const initialState = {
 export const __getFeed = createAsyncThunk(
 	"feed/getFeed",
 	async (feedId, thunkAPI) => {
-		console.log(feedId);
 		const response = await axios.get(`${BASE_URL}/feeds/${feedId}`, {
 			headers: {
 				Authorization: token,
@@ -55,7 +54,6 @@ export const __likeThunk = createAsyncThunk(
 export const __changeThunk = createAsyncThunk(
 	"feed/change",
 	async (payload, thunkAPI) => {
-		await console.log("something changed");
 		return thunkAPI.fulfillWithValue();
 	},
 );
@@ -64,7 +62,6 @@ export const __changeThunk = createAsyncThunk(
 export const __followThunk = createAsyncThunk(
 	"feed/like",
 	async (toMemberId, thunkAPI) => {
-		console.log(toMemberId);
 		try {
 			const response = await axios.get(`${BASE_URL}/follow/${toMemberId}`, {
 				headers: {
@@ -73,11 +70,13 @@ export const __followThunk = createAsyncThunk(
 					"Content-Type": "application/json",
 				},
 			});
+
 			console.log(response);
 			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return console.log(error);
 		}
+
 	},
 );
 
@@ -96,12 +95,14 @@ export const likeSlice = createSlice({
 		[__getFeed.fulfilled]: (state, action) => {
 			state.feed = action.payload;
 		},
+
 		[__likeThunk.fulfilled]: (state, action) => {
 			state.reduxLike = action.payload;
 		},
 		[__likeChange.fulfilled]: (state, action) => {
 			state.reduxLike = action.payload;
 		},
+
 		[__changeThunk.pending]: (state, action) => {
 			state.isChanged = true;
 		},

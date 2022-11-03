@@ -60,9 +60,7 @@ export const commentSlice = createSlice({
 		[__addComment.fulfilled]: (state, action) => {
 			state.commentList.push(action.payload);
 		},
-		[__addComment.rejected]: (state, action) => {
-			console.log(action.payload);
-		},
+		[__addComment.rejected]: (state, action) => {},
 		// // 댓글 삭제
 		[__delComment.fulfilled]: (state, action) => {
 			state.commentList.filter(comments => comments.id !== action.payload);

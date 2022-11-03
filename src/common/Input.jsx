@@ -39,6 +39,7 @@ const StInput = styled.input`
 					padding: 16px 8px;
 					background-color: rgb(239, 239, 239);
 					border-radius: 8px;
+					padding: 3px 16px;
 				`;
 			default:
 				break;

@@ -41,6 +41,10 @@ const Feed = ({ feedItem }) => {
 					dispatch(getFeedItem(feedItem));
 					OpenModal();
 				}}
+				// onClick={() => {
+				// 	dispatch(getFeedItem(feedItem));
+				// 	OpenModal();
+				// }}
 				feedImage={feedImage}
 				variant="feedImg"
 			></Image>

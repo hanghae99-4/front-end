@@ -38,6 +38,12 @@ const DetailPage = () => {
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
 	const newFeeds = useSelector(state => state.like.feed);
+	const commentList = useSelector(state => state.comments.commentList);
+	console.log("commentList", commentList);
+
+	// useEffect(()=>{
+	// 	dispatch(__getFeed())
+	// },[])
 
 	const {
 		feedId,
@@ -139,7 +145,7 @@ const DetailPage = () => {
 								<Margin margin="10px 0" />
 								{/* 댓글목록 */}
 								<Div variant="CommentList">
-									{commentsList.map(comment => (
+									{commentList?.map(comment => (
 										<Comment key={comment.id} comment={comment} />
 									))}
 								</Div>

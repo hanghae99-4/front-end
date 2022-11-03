@@ -18,23 +18,20 @@ const Comment = ({ comment }) => {
 
 	const dispatch = useDispatch();
 
-	const { id, member, contents, feedId } = comment;
-	console.log(comment);
-
 	const delRdComment = () => {
-		dispatch(delFeedComment(id));
+		dispatch(delFeedComment(comment.id));
 	};
 	return (
 		<Div variant="detailContent">
 			<Image variant="profileDefaultIconMid"></Image>
-			<A>{member.memberId}</A>
-			<Text>{contents}</Text>
-			{member.memberId === myId ? (
+			<A>{comment.memberId}</A>
+			<Text>{comment.contents}</Text>
+			{comment.memberId === myId ? (
 				<DelBtn
 					src={delBtn}
 					alt=""
 					onClick={() => {
-						dispatch(__delComment(id));
+						dispatch(__delComment(comment.id));
 						delRdComment();
 						dispatch(__changeThunk());
 					}}
