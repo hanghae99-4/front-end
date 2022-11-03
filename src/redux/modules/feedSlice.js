@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const BASE_URL = process.env.REACT_APP_SERVER;
+const BASE_URL = `http://13.125.198.85:8080`;
 const token = localStorage.getItem("token");
 
 // InitialState

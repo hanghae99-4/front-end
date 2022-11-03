@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //URL
-const BASE_URL = process.env.REACT_APP_SERVER;
+const BASE_URL = `http://13.125.198.85:8080`;
 
 //token
 const token = localStorage.getItem("token");
@@ -76,7 +76,6 @@ export const __followThunk = createAsyncThunk(
 		} catch (error) {
 			return console.log(error);
 		}
-
 	},
 );
 
