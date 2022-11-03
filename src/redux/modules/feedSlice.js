@@ -35,6 +35,24 @@ export const __addFeed = createAsyncThunk(
 	},
 );
 
+//! 검색
+export const __requestSearch = createAsyncThunk(
+	"feed/requestSearch",
+	async (payload, thunkAPI) => {
+		console.log("payload", payload);
+		try {
+			const response = await axios.post(`${BASE_URL}/search`, payload, {
+				headers: {
+					Authorization: token,
+				},
+			});
+			return thunkAPI.fulfillWithValue(response.data);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	},
+);
+
 //! 프로필 페이지 리스트
 export const __getProFileFeedList = createAsyncThunk(
 	"feed/getProFileFeedList",
@@ -97,6 +115,23 @@ export const __delFeedItem = createAsyncThunk(
 				},
 			});
 			return thunkAPI.fulfillWithValue(payload);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	},
+);
+
+//! 특정 피드 상세 페이지 조회
+export const __getFeedItem = createAsyncThunk(
+	"feed/getFeedItem",
+	async (payload, thunkAPI) => {
+		try {
+			const response = await axios.get(`${BASE_URL}/feeds/${payload}`, {
+				headers: {
+					Authorization: token,
+				},
+			});
+			return thunkAPI.fulfillWithValue(response.data);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
@@ -166,6 +201,14 @@ export const feedSlice = createSlice({
 			state.mainFeedList.push(newFeedItem);
 		},
 		[__addFeed.rejected]: (state, action) => {},
+
+		//! 검색
+		[__requestSearch.fulfilled]: (state, action) => {
+			console.log("__requestSearch fullfilled", action.payload);
+		},
+		[__requestSearch.rejected]: (state, action) => {
+			console.log("__requestSearch rejected", action.payload);
+		},
 
 		//! 프로필 페이지 조회
 		[__getProFileFeedList.fulfilled]: (state, action) => {

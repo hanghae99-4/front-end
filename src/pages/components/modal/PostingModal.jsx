@@ -52,6 +52,8 @@ function PostingModal() {
 	const handleUpload = () => {
 		dispatch(__addFeed(post));
 		dispatch(updateIsModalOpen());
+		setUploadImageForm(null);
+		setPreviewImage(null);
 	};
 
 	if (!isModalOpen) return null;

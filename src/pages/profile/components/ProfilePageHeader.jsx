@@ -19,7 +19,9 @@ function ProfilePageHeader({ memberId }) {
 	const userInfo = useSelector(state => state.feedSlice.profileFeedList);
 	const { feedsList, followList, followerList, username } = userInfo;
 
-	console.log(followerList);
+	// <StDiv>게시물 {feedsList?.length}</StDiv>
+	// <StDiv>팔로워 {followerList?.length}</StDiv>
+	// <StDiv>팔로우 {followList?.length}</StDiv>
 
 	return (
 		<Layout variant="profilePageHeaderLayout">

@@ -56,7 +56,7 @@ const FeedContent = ({
 						<Text>{contents}</Text>
 					</NicknameWrap>
 				</Wrap>
-				{commentsList.length === 0 ? null : (
+				{commentsList?.length === 0 ? null : (
 					<A
 						variant="comment"
 						onClick={() => {
@@ -64,7 +64,7 @@ const FeedContent = ({
 							OpenModal();
 						}}
 					>
-						댓글 {commentsList.length}개 모두 보기
+						댓글 {commentsList?.length}개 모두 보기
 					</A>
 				)}
 			</Div>

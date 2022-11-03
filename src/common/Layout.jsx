@@ -49,7 +49,6 @@ const StLayout = styled.div`
 					height: 100%;
 					justify-content: center;
 					box-sizing: border-box;
-					flex-direction: column;
 					position: relative;
 					background-color: rgb(250, 250, 250);
 					margin-top: 60px;
