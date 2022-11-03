@@ -40,6 +40,9 @@ const StDiv = styled.div`
 					justify-content: center;
 					border-bottom: 1px solid rgb(219, 219, 219);
 					background-color: white;
+					position: fixed;
+					top: 0;
+					z-index: 10;
 				`;
 
 			// 조인
@@ -104,6 +107,7 @@ const StDiv = styled.div`
 				return css`
 					background-color: rgba(0, 0, 0, 0.6);
 					position: fixed;
+					top: 0;
 					width: 100vw;
 					height: 100vh;
 					z-index: 20;
@@ -119,7 +123,7 @@ const StDiv = styled.div`
 			case "closeModalBtn":
 				return css`
 					position: fixed;
-					top: 20px;
+					top: 80px;
 					right: 20px;
 				`;
 			case "uploadImageArea":

@@ -13,6 +13,7 @@ export const __addComment = createAsyncThunk(
 	"feed/addComment",
 	async (payload, thunkAPI) => {
 		const { feedId, comments } = payload;
+		console.log(payload);
 		try {
 			const response = await axios.post(
 				`${BASE_URL}/${feedId}/comments`,
@@ -42,7 +43,7 @@ export const __delComment = createAsyncThunk(
 				},
 			});
 			console.log(response);
-			return thunkAPI.fulfillWithValue(response.data.data);
+			return thunkAPI.fulfillWithValue(payload);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
@@ -57,14 +58,14 @@ export const commentSlice = createSlice({
 	extraReducers: {
 		// 댓글 등록
 		[__addComment.fulfilled]: (state, action) => {
-			console.log("sucsess");
+			state.commentList.push(action.payload);
 		},
 		[__addComment.rejected]: (state, action) => {
 			console.log(action.payload);
 		},
 		// // 댓글 삭제
 		[__delComment.fulfilled]: (state, action) => {
-			console.log("sucsess");
+			state.commentList.filter(comments => comments.id !== action.payload);
 		},
 		[__delComment.rejected]: (state, action) => {},
 	},

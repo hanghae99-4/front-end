@@ -14,12 +14,15 @@ import Comment from "./components/Comment";
 import FeedIcon from "../feed/components/FeedIcon";
 import TextArea from "../../common/TextArea";
 import jwt_decode from "jwt-decode";
-import { __delFeedItem } from "../../redux/modules/feedSlice";
+import {
+	addFeedComment,
+	delFeedComment,
+	__delFeedItem,
+} from "../../redux/modules/feedSlice";
 import { useEffect, useState } from "react";
 import { __changeThunk, __getFeed } from "../../redux/modules/likeSlice";
 import { __addComment } from "../../redux/modules/commentSlice";
 import { getFeedItem } from "../../redux/modules/feedSlice";
-
 
 const DetailPage = () => {
 	const [change, setChange] = useState(false);
@@ -30,10 +33,12 @@ const DetailPage = () => {
 	const myId = decode.sub;
 
 	const dispatch = useDispatch();
+
 	//useSelector
 	const isDetailOpen = useSelector(state => state.modalSlice.isDetailModalOpen);
 	const feedItem = useSelector(state => state.feedSlice.feedItem);
-	const isLikeChanged = useSelector(state => state.like.isChanged);
+	const newFeeds = useSelector(state => state.like.feed);
+
 	const {
 		feedId,
 		feedImage,
@@ -46,24 +51,32 @@ const DetailPage = () => {
 		commentsList,
 	} = feedItem;
 
-	//작성자 확인
+	// 작성자 확인
 	const Author = `${memberId}`;
 
+	// 모달창
 	const CloseModal = () => {
 		dispatch(updateDetailModalOpen());
 	};
 
 	// Add Comment
 	const [comment, setComment] = useState("");
+	const [comments, setComments] = useState(commentsList);
 
 	const commentChange = e => {
 		setComment(e.target.value);
 	};
-	const addCommentHandler = async () => {
+	const addCommentHandler = () => {
 		const commentInfo = { feedId: feedId, comments: comment };
-		await dispatch(__addComment(commentInfo));
-		await dispatch(__changeThunk());
+		dispatch(__addComment(commentInfo));
+		// dispatch(addFeedComment({ contents: comment, id:  }));
+		dispatch(__changeThunk());
 		setComment("");
+	};
+
+	const getNewComments = () => {
+		dispatch(__getFeed(feedId));
+		// if()setComments()
 	};
 
 	if (!isDetailOpen) return null;
@@ -121,8 +134,9 @@ const DetailPage = () => {
 									<A>{memberId}</A>
 									{contents && <Text>{contents}</Text>}
 								</Div>
-								{/* 댓글목록 */}
 								<Margin margin="10px 0" />
+								{/* 댓글목록 */}
+								((
 								<Div variant="CommentList">
 									{commentsList.map(comment => (
 										<Comment key={comment.id} comment={comment} />
@@ -149,7 +163,9 @@ const DetailPage = () => {
 									/>
 									<Button
 										variant="smallWhite-position"
-										onClick={addCommentHandler}
+										onClick={() => {
+											addCommentHandler();
+										}}
 									>
 										게시
 									</Button>

@@ -6,10 +6,11 @@ const Text = ({ children, ...props }) => {
 export default Text;
 
 const StText = styled.span`
-	position: relative;
+	display: flex;
+	flex-direction: row;
+	margin-left: 5px;
 	font-size: 14px;
 	line-height: 18px;
-	word-break: break-all;
 
 	${({ variant }) => {
 		switch (variant) {
