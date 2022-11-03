@@ -23,7 +23,7 @@ const StLayout = styled.div`
 					height: 100%;
 					flex-direction: column;
 					justify-content: center;
-					margin-top: 60px;
+					margin: 60px auto 0 auto;
 					background-color: #fafafa;
 				`;
 			case "profilePageHeaderLayout":

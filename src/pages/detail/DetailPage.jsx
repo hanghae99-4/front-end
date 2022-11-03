@@ -62,6 +62,8 @@ const DetailPage = () => {
 	// Add Comment
 	const [comment, setComment] = useState("");
 	const [comments, setComments] = useState(commentsList);
+	const [isLike, setIsLike] = useState(heartByMe);
+	const [heartCount, setHeartCount] = useState(heartNum);
 
 	const commentChange = e => {
 		setComment(e.target.value);
@@ -136,7 +138,6 @@ const DetailPage = () => {
 								</Div>
 								<Margin margin="10px 0" />
 								{/* 댓글목록 */}
-								((
 								<Div variant="CommentList">
 									{commentsList.map(comment => (
 										<Comment key={comment.id} comment={comment} />

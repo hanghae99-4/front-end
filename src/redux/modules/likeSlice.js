@@ -12,6 +12,7 @@ const refreshToken = localStorage.getItem("refresh-token");
 const initialState = {
 	feed: [],
 	isChanged: false,
+	reduxLike: false,
 };
 
 // 특정 피드 조회
@@ -45,7 +46,8 @@ export const __likeThunk = createAsyncThunk(
 				"Content-Type": "application/json",
 			},
 		});
-		return thunkAPI.fulfillWithValue(response.data);
+		console.log(response.data.data);
+		return thunkAPI.fulfillWithValue(response.data.data);
 	},
 );
 
@@ -72,10 +74,17 @@ export const __followThunk = createAsyncThunk(
 				},
 			});
 			console.log(response);
-			return thunkAPI.fulfillWithValue(response.data);
+			return thunkAPI.fulfillWithValue(response.data.data);
 		} catch (error) {
 			return console.log(error);
 		}
+	},
+);
+
+export const __likeChange = createAsyncThunk(
+	"feed/like",
+	async (like, thunkAPI) => {
+		return thunkAPI.fulfillWithValue(like);
 	},
 );
 
@@ -88,7 +97,10 @@ export const likeSlice = createSlice({
 			state.feed = action.payload;
 		},
 		[__likeThunk.fulfilled]: (state, action) => {
-			console.log(action.payload);
+			state.reduxLike = action.payload;
+		},
+		[__likeChange.fulfilled]: (state, action) => {
+			state.reduxLike = action.payload;
 		},
 		[__changeThunk.pending]: (state, action) => {
 			state.isChanged = true;
