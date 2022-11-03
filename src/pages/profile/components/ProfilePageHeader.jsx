@@ -21,7 +21,6 @@ function ProfilePageHeader({ memberId }) {
 
 	console.log(followerList);
 
-
 	return (
 		<Layout variant="profilePageHeaderLayout">
 			{/* 프로필 이미지 */}
@@ -52,7 +51,6 @@ function ProfilePageHeader({ memberId }) {
 
 				{/* 유저네임 영역 */}
 				<StDiv variant="smallBold">{username}</StDiv>
-
 			</Div>
 		</Layout>
 	);
