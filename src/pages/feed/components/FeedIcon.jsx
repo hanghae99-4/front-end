@@ -28,14 +28,6 @@ const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 		console.log(heartCount);
 	};
 
-	const heartCounting = () => {
-		if (isLike) {
-			setHeartCount(heartCount - 1);
-		} else {
-			setHeartCount(heartCount + 1);
-		}
-	};
-
 	const OpenModal = () => {
 		console.log("openModal");
 		dispatch(updateDetailModalOpen());
@@ -48,7 +40,6 @@ const FeedIcon = ({ feedItem, feedId, memberId, heartByMe, heartNum }) => {
 					variant={isLike ? "cancelLike" : "like"}
 					heartByMe={heartByMe}
 					onClick={() => {
-						heartCounting();
 						onClickLike();
 					}}
 				/>
