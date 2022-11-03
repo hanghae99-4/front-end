@@ -4,14 +4,7 @@ import ProfileFeedsArea from "./components/ProfileFeedsArea";
 import ProfilePageHeader from "./components/ProfilePageHeader";
 
 const ProfilePage = () => {
-
-	const dispatch = useDispatch();
 	const memberId = useParams()?.userId;
-	useEffect(() => {
-		if (memberId) dispatch(__getProFileFeedList(memberId));
-	}, [dispatch, memberId]);
-	const feedItems = useSelector(state => state.feedSlice.profileFeedList);
-
 	return (
 		<>
 			<Layout variant="mainContentsLayout">
