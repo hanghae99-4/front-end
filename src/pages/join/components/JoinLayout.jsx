@@ -13,6 +13,7 @@ export default Layout;
 const Main = styled.div`
 	min-width: 800px;
 	height: 100%;
+	min-height: 800px;
 	align-items: stretch;
 	box-sizing: border-box;
 	display: flex;

@@ -62,13 +62,14 @@ const StDiv = styled.div`
 					background-color: rgb(255, 255, 255);
 					border: 1px solid rgb(219, 219, 219);
 					width: 350px;
+					height: 550px;
 					border-radius: 1px;
 					box-sizing: border-box;
 					flex-direction: column;
 					flex-shrink: 0;
 					font: inherit;
 					font-size: 100%;
-					margin: 0 0 10px;
+					margin: 85px 0 10px;
 					padding: 10px 0;
 					position: relative;
 					vertical-align: baseline;

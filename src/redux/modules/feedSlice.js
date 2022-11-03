@@ -204,6 +204,11 @@ export const feedSlice = createSlice({
 		[__requestSearch.rejected]: (state, action) => {
 			console.log("__requestSearch rejected", action.payload);
 		},
+		//! 유저 정보 조회
+		[__getProFile.fulfilled]: (state, action) => {
+			state.profile = action.payload;
+		},
+		[__getProFile.rejected]: (state, action) => {},
 
 		//! 프로필 페이지 조회
 		[__getProFileFeedList.fulfilled]: (state, action) => {
