@@ -145,7 +145,7 @@ const DetailPage = () => {
 								<Margin margin="10px 0" />
 								{/* 댓글목록 */}
 								<Div variant="CommentList">
-									{commentList?.map(comment => (
+									{commentsList.map(comment => (
 										<Comment key={comment.id} comment={comment} />
 									))}
 								</Div>

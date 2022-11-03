@@ -18,15 +18,16 @@ const Comment = ({ comment }) => {
 
 	const dispatch = useDispatch();
 
+	console.log(comment);
 	const delRdComment = () => {
 		dispatch(delFeedComment(comment.id));
 	};
 	return (
 		<Div variant="detailContent">
 			<Image variant="profileDefaultIconMid"></Image>
-			<A>{comment.memberId}</A>
+			<A>{comment.member.memberId}</A>
 			<Text>{comment.contents}</Text>
-			{comment.memberId === myId ? (
+			{comment.member.memberId === myId ? (
 				<DelBtn
 					src={delBtn}
 					alt=""

@@ -6,7 +6,10 @@ import Div from "../../../common/Div";
 import Image from "../../../common/Image";
 import Layout from "../../../common/Layout";
 import Margin from "../../../common/Margin";
-import { __getProFileFeedList } from "../../../redux/modules/feedSlice";
+import {
+	__getProFile,
+	__getProFileFeedList,
+} from "../../../redux/modules/feedSlice";
 import { __followThunk } from "../../../redux/modules/likeSlice";
 
 function ProfilePageHeader({ memberId }) {
@@ -14,10 +17,13 @@ function ProfilePageHeader({ memberId }) {
 
 	useEffect(() => {
 		dispatch(__getProFileFeedList(memberId));
+		dispatch(__getProFile(memberId));
 	}, [dispatch]);
 
+	const user = useSelector(state => state.feedSlice.profile);
+	const { feedsList, followList, followerList, username } = user;
 	const userInfo = useSelector(state => state.feedSlice.profileFeedList);
-	const { feedsList, followList, followerList, username } = userInfo;
+	// const { username } = userInfo;
 
 	// <StDiv>게시물 {feedsList?.length}</StDiv>
 	// <StDiv>팔로워 {followerList?.length}</StDiv>
