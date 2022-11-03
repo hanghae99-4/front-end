@@ -143,11 +143,6 @@ export const feedSlice = createSlice({
 				heartNum: action.payload.heartNum,
 			};
 		},
-		addFeedComment: (state, action) => {
-			state.feedItem.commentsList = state.feedItem.commentsList.push(
-				action.payload,
-			);
-		},
 		delFeedComment: (state, action) => {
 			state.feedItem.commentsList = state.feedItem.commentsList.filter(
 				comment => comment.id !== action.payload,
