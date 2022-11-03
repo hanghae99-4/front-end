@@ -71,13 +71,22 @@ const Image = ({ variant, onClick, feedImage }) => {
 				<img src="/images/uploadFile-icon.png" width="80" height="77" alt="" />
 			);
 		case "goBackIcon":
-			return <img src="/images/back-icon.png" height="24" width="24" alt="" />;
+			return (
+				<img
+					src="/images/back-icon.png"
+					height="24"
+					width="24"
+					alt=""
+					onClick={onClick}
+					style={{ cursor: "pointer" }}
+				/>
+			);
 		case "imgSample":
 			return (
 				<img
 					onClick={onClick}
 					src={feedImage}
-					style={{ objectFit: "cover", overflow: "hidden" }}
+					style={{ objectFit: "cover", overflow: "hidden", cursor: "pointer" }}
 					width="100%"
 					height="293px"
 					alt=""
